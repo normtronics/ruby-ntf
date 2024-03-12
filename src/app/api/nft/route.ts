@@ -20,12 +20,12 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "NFT not found" }, { status: 404 });
     }
 
-    // if (nft.minted) {
-    //   return NextResponse.json(
-    //     { error: "NFT already minted" },
-    //     { status: 400 }
-    //   );
-    // }
+    if (nft.minted) {
+      return NextResponse.json(
+        { error: "NFT already minted" },
+        { status: 400 }
+      );
+    }
 
     const engine = new Engine({
       url: process.env.ENGINE_URL!,
