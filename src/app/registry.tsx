@@ -3,6 +3,9 @@
 import React, { useRef, useState } from "react"
 import { useServerInsertedHTML } from "next/navigation"
 import { StyleRegistry, createStyleRegistry } from "styled-jsx"
+
+// @ts-ignore
+// eslint-disable-next-line @next/next/no-document-import-in-page
 import { Main } from "next/document"
 
 // @ts-ignore
