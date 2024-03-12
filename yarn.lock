@@ -1165,6 +1165,19 @@
     ethers "^5.7.2"
     node-fetch "^2.6.7"
 
+"@eth-optimism/sdk@3.2.2":
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/@eth-optimism/sdk/-/sdk-3.2.2.tgz#732c2d6fde96a25303b3c5b39b3b3ed1f913d9aa"
+  integrity sha512-P8YXAlh2lun0KZlwrw4FqmK4kNIoOOzI816XXhfkW3nMVADGRAru3TKSM74MgmEuyGiHrA9EoPRq1WLqUX4B0w==
+  dependencies:
+    "@eth-optimism/contracts" "0.6.0"
+    "@eth-optimism/contracts-bedrock" "0.17.1"
+    "@eth-optimism/core-utils" "0.13.1"
+    lodash "^4.17.21"
+    merkletreejs "^0.3.11"
+    rlp "^2.2.7"
+    semver "^7.6.0"
+
 "@eth-optimism/sdk@^3.2.1":
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/@eth-optimism/sdk/-/sdk-3.2.1.tgz#70e10c84580fd9c02d82a6482cd233f8b317632b"
@@ -4061,6 +4074,18 @@
     uuid "^9.0.1"
     zod "^3.22.3"
 
+"@thirdweb-dev/auth@^4.1.40":
+  version "4.1.40"
+  resolved "https://registry.yarnpkg.com/@thirdweb-dev/auth/-/auth-4.1.40.tgz#8c9f23db31ef3f9870323b10f6a183720f0212c6"
+  integrity sha512-vxmUkq9U1dlYDrrRUsJ4awotcLqBLd2wPrc/1mrmu7n9Eb+SFUPGdrcd2HqR6qw4qfSyQ4QrI4I/EHaOMTB2Ng==
+  dependencies:
+    "@fastify/cookie" "^9.1.0"
+    "@thirdweb-dev/wallets" "2.4.18"
+    cookie "^0.5.0"
+    fastify-type-provider-zod "^1.1.9"
+    uuid "^9.0.1"
+    zod "^3.22.3"
+
 "@thirdweb-dev/chains@0.1.78":
   version "0.1.78"
   resolved "https://registry.yarnpkg.com/@thirdweb-dev/chains/-/chains-0.1.78.tgz#480e61bfb3822c1d73702385dd9bfd9c2d95faa8"
@@ -4193,6 +4218,30 @@
     yaml "^2.3.4"
     zod "^3.22.3"
 
+"@thirdweb-dev/sdk@4.0.43":
+  version "4.0.43"
+  resolved "https://registry.yarnpkg.com/@thirdweb-dev/sdk/-/sdk-4.0.43.tgz#8884fac99da7aaebaf4862381f0024ee9a921a4b"
+  integrity sha512-MlfrJVC4WI1fRvqMFg+uc8V+SghhJifjgTswP2B/PK64M5tZugn9jLjrQkFFpbL/EEXQLU5Q03vWDx++UkrVHw==
+  dependencies:
+    "@eth-optimism/sdk" "3.2.2"
+    "@thirdweb-dev/chains" "0.1.78"
+    "@thirdweb-dev/contracts-js" "1.3.16"
+    "@thirdweb-dev/crypto" "0.2.1"
+    "@thirdweb-dev/generated-abis" "0.0.1"
+    "@thirdweb-dev/merkletree" "0.2.1"
+    "@thirdweb-dev/storage" "2.0.10"
+    abitype "^0.2.5"
+    bn.js "^5.2.1"
+    bs58 "^5.0.0"
+    buffer "^6.0.3"
+    eventemitter3 "^5.0.1"
+    fast-deep-equal "^3.1.3"
+    tiny-invariant "^1.2.0"
+    tweetnacl "^1.0.3"
+    uuid "^9.0.1"
+    yaml "^2.3.4"
+    zod "^3.22.3"
+
 "@thirdweb-dev/storage@2.0.10":
   version "2.0.10"
   resolved "https://registry.yarnpkg.com/@thirdweb-dev/storage/-/storage-2.0.10.tgz#d9e06692b0cb37b3ff2480a6f3ec1133edf5e852"
@@ -4225,6 +4274,45 @@
     "@thirdweb-dev/contracts-js" "1.3.16"
     "@thirdweb-dev/crypto" "0.2.1"
     "@thirdweb-dev/sdk" "4.0.42"
+    "@walletconnect/core" "^2.9.1"
+    "@walletconnect/ethereum-provider" "^2.9.1"
+    "@walletconnect/jsonrpc-utils" "^1.0.8"
+    "@walletconnect/modal" "^2.6.1"
+    "@walletconnect/types" "^2.9.1"
+    "@walletconnect/utils" "^2.10.2"
+    "@walletconnect/web3wallet" "^1.8.7"
+    asn1.js "5.4.1"
+    bn.js "5.2.0"
+    buffer "^6.0.3"
+    eth-provider "^0.13.6"
+    ethereumjs-util "^7.1.3"
+    eventemitter3 "^5.0.1"
+    key-encoder "2.0.3"
+    magic-sdk "^13.6.2"
+    web3-core "1.5.2"
+
+"@thirdweb-dev/wallets@2.4.18":
+  version "2.4.18"
+  resolved "https://registry.yarnpkg.com/@thirdweb-dev/wallets/-/wallets-2.4.18.tgz#c72c7cf1bcc4d5b23b8bac5fada5bd0aff880285"
+  integrity sha512-ColttFtBlP+YAV6Pv5kPXdG35yGShfE0vACzkPS/q+s+i1gVkja9BXYB6mRo1uxyD+nyohgIVNBXs6i7wf/TNQ==
+  dependencies:
+    "@account-abstraction/contracts" "^0.5.0"
+    "@blocto/sdk" "^0.5.4"
+    "@coinbase/wallet-sdk" "^3.7.1"
+    "@google-cloud/kms" "3.0.1"
+    "@magic-ext/connect" "^6.7.2"
+    "@magic-ext/oauth" "^7.6.2"
+    "@magic-sdk/provider" "^13.6.2"
+    "@metamask/eth-sig-util" "^4.0.0"
+    "@paperxyz/embedded-wallet-service-sdk" "^1.2.5"
+    "@paperxyz/sdk-common-utilities" "^0.1.0"
+    "@safe-global/safe-core-sdk" "^3.3.4"
+    "@safe-global/safe-ethers-adapters" "0.1.0-alpha.17"
+    "@safe-global/safe-ethers-lib" "^1.9.4"
+    "@thirdweb-dev/chains" "0.1.78"
+    "@thirdweb-dev/contracts-js" "1.3.16"
+    "@thirdweb-dev/crypto" "0.2.1"
+    "@thirdweb-dev/sdk" "4.0.43"
     "@walletconnect/core" "^2.9.1"
     "@walletconnect/ethereum-provider" "^2.9.1"
     "@walletconnect/jsonrpc-utils" "^1.0.8"
@@ -6649,7 +6737,7 @@ ethereumjs-util@^7.1.3, ethereumjs-util@^7.1.5:
     ethereum-cryptography "^0.1.3"
     rlp "^2.2.4"
 
-ethers@5.7.2, ethers@^5.7.2:
+ethers@5, ethers@5.7.2, ethers@^5.7.2:
   version "5.7.2"
   resolved "https://registry.yarnpkg.com/ethers/-/ethers-5.7.2.tgz#3a7deeabbb8c030d4126b24f84e525466145872e"
   integrity sha512-wswUsmWo1aOK8rR7DIKiWSw9DbLWe6x98Jrn8wcTflTVvaXhAMaB5zGAXy0GYQEQp9iO1iSHWVyARQm11zUtyg==
