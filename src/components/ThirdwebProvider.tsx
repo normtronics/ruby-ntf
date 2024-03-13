@@ -9,7 +9,7 @@ console.log(process.env.NEXT_PUBLIC_CHAIN)
 export const CustomThirdwebProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <ThirdwebProvider
-      activeChain={137}
+      activeChain={process.env.NEXT_PUBLIC_CHAIN}
       clientId={process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID}
       locale={en()}
       supportedWallets={[

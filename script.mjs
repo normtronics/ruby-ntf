@@ -12,7 +12,7 @@ const NFTs = [
   },
 ];
 
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "./prisma/generated/client/index.js";
 
 if (process.env.NODE_ENV === "production") {
   prisma = new PrismaClient();

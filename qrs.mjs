@@ -15,14 +15,14 @@ const main = async () => {
   try {
     const nfts = await prisma.nFT.findMany({
       where: {
-        minted: true,
+        minted: false,
       },
     });
 
     for (const nft of nfts) {
       await qrcode.toFile(
         `./public/qrs/${nft.id}.png`,
-        `https://nfts-one.vercel.app//claim?id=${nft.id}`
+        `https://nfts-one.vercel.app/claim?id=${nft.id}`
       );
     }
   } catch (e) {
