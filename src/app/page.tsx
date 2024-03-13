@@ -47,6 +47,19 @@ export default function Home() {
         TOTAL ITEMS: <span>{nftBalance?.toNumber()}</span>
       </h2>
 
+      <ConnectWallet 
+        className={styles.connectBtn}
+        theme={"dark"}
+        modalTitle={"The Rose Crib"}
+        switchToActiveChain={true}
+        modalSize={"wide"}
+        auth={{
+          onLogin: (token: string) => {
+            console.log('token', token)
+          }
+        }}
+      />
+
       {!address && <h1>Connect your wallet</h1>}
       {address && isLoading && <h1>Loading...</h1>}
       {address && !isLoading && !nfts?.length && <h1>You have no NFTs :(</h1>}
