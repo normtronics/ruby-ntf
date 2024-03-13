@@ -881,7 +881,6 @@ export namespace Prisma {
     name: string | null
     description: string | null
     minted: boolean | null
-    unlimited: boolean | null
     image: string | null
     owner: string | null
     createdAt: Date | null
@@ -893,7 +892,6 @@ export namespace Prisma {
     name: string | null
     description: string | null
     minted: boolean | null
-    unlimited: boolean | null
     image: string | null
     owner: string | null
     createdAt: Date | null
@@ -905,7 +903,6 @@ export namespace Prisma {
     name: number
     description: number
     minted: number
-    unlimited: number
     image: number
     owner: number
     createdAt: number
@@ -920,7 +917,6 @@ export namespace Prisma {
     name?: true
     description?: true
     minted?: true
-    unlimited?: true
     image?: true
     owner?: true
     createdAt?: true
@@ -932,7 +928,6 @@ export namespace Prisma {
     name?: true
     description?: true
     minted?: true
-    unlimited?: true
     image?: true
     owner?: true
     createdAt?: true
@@ -944,7 +939,6 @@ export namespace Prisma {
     name?: true
     description?: true
     minted?: true
-    unlimited?: true
     image?: true
     owner?: true
     createdAt?: true
@@ -1030,7 +1024,6 @@ export namespace Prisma {
     name: string
     description: string
     minted: boolean
-    unlimited: boolean
     image: string
     owner: string | null
     createdAt: Date
@@ -1060,7 +1053,6 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     minted?: boolean
-    unlimited?: boolean
     image?: boolean
     owner?: boolean
     createdAt?: boolean
@@ -1073,7 +1065,6 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     minted?: boolean
-    unlimited?: boolean
     image?: boolean
     owner?: boolean
     createdAt?: boolean
@@ -1090,7 +1081,6 @@ export namespace Prisma {
       name: string
       description: string
       minted: boolean
-      unlimited: boolean
       image: string
       owner: string | null
       createdAt: Date
@@ -1494,7 +1484,6 @@ export namespace Prisma {
     readonly name: FieldRef<"NFT", 'String'>
     readonly description: FieldRef<"NFT", 'String'>
     readonly minted: FieldRef<"NFT", 'Boolean'>
-    readonly unlimited: FieldRef<"NFT", 'Boolean'>
     readonly image: FieldRef<"NFT", 'String'>
     readonly owner: FieldRef<"NFT", 'String'>
     readonly createdAt: FieldRef<"NFT", 'DateTime'>
@@ -1806,7 +1795,6 @@ export namespace Prisma {
     name: 'name',
     description: 'description',
     minted: 'minted',
-    unlimited: 'unlimited',
     image: 'image',
     owner: 'owner',
     createdAt: 'createdAt',
@@ -1929,7 +1917,6 @@ export namespace Prisma {
     name?: StringFilter<"NFT"> | string
     description?: StringFilter<"NFT"> | string
     minted?: BoolFilter<"NFT"> | boolean
-    unlimited?: BoolFilter<"NFT"> | boolean
     image?: StringFilter<"NFT"> | string
     owner?: StringNullableFilter<"NFT"> | string | null
     createdAt?: DateTimeFilter<"NFT"> | Date | string
@@ -1942,7 +1929,6 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     minted?: SortOrder
-    unlimited?: SortOrder
     image?: SortOrder
     owner?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -1958,7 +1944,6 @@ export namespace Prisma {
     name?: StringFilter<"NFT"> | string
     description?: StringFilter<"NFT"> | string
     minted?: BoolFilter<"NFT"> | boolean
-    unlimited?: BoolFilter<"NFT"> | boolean
     image?: StringFilter<"NFT"> | string
     owner?: StringNullableFilter<"NFT"> | string | null
     createdAt?: DateTimeFilter<"NFT"> | Date | string
@@ -1971,7 +1956,6 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     minted?: SortOrder
-    unlimited?: SortOrder
     image?: SortOrder
     owner?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -1990,7 +1974,6 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"NFT"> | string
     description?: StringWithAggregatesFilter<"NFT"> | string
     minted?: BoolWithAggregatesFilter<"NFT"> | boolean
-    unlimited?: BoolWithAggregatesFilter<"NFT"> | boolean
     image?: StringWithAggregatesFilter<"NFT"> | string
     owner?: StringNullableWithAggregatesFilter<"NFT"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"NFT"> | Date | string
@@ -2003,7 +1986,6 @@ export namespace Prisma {
     name: string
     description: string
     minted: boolean
-    unlimited: boolean
     image: string
     owner?: string | null
     createdAt?: Date | string
@@ -2016,7 +1998,6 @@ export namespace Prisma {
     name: string
     description: string
     minted: boolean
-    unlimited: boolean
     image: string
     owner?: string | null
     createdAt?: Date | string
@@ -2029,7 +2010,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     minted?: BoolFieldUpdateOperationsInput | boolean
-    unlimited?: BoolFieldUpdateOperationsInput | boolean
     image?: StringFieldUpdateOperationsInput | string
     owner?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -2042,7 +2022,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     minted?: BoolFieldUpdateOperationsInput | boolean
-    unlimited?: BoolFieldUpdateOperationsInput | boolean
     image?: StringFieldUpdateOperationsInput | string
     owner?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -2055,7 +2034,6 @@ export namespace Prisma {
     name: string
     description: string
     minted: boolean
-    unlimited: boolean
     image: string
     owner?: string | null
     createdAt?: Date | string
@@ -2068,7 +2046,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     minted?: BoolFieldUpdateOperationsInput | boolean
-    unlimited?: BoolFieldUpdateOperationsInput | boolean
     image?: StringFieldUpdateOperationsInput | string
     owner?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -2081,7 +2058,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     minted?: BoolFieldUpdateOperationsInput | boolean
-    unlimited?: BoolFieldUpdateOperationsInput | boolean
     image?: StringFieldUpdateOperationsInput | string
     owner?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -2167,7 +2143,6 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     minted?: SortOrder
-    unlimited?: SortOrder
     image?: SortOrder
     owner?: SortOrder
     createdAt?: SortOrder
@@ -2180,7 +2155,6 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     minted?: SortOrder
-    unlimited?: SortOrder
     image?: SortOrder
     owner?: SortOrder
     createdAt?: SortOrder
@@ -2192,7 +2166,6 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     minted?: SortOrder
-    unlimited?: SortOrder
     image?: SortOrder
     owner?: SortOrder
     createdAt?: SortOrder

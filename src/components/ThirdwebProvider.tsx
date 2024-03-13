@@ -4,10 +4,12 @@ import { ThirdwebProvider, coinbaseWallet, embeddedWallet, en, localWallet, meta
 
 import type { FC } from "react";
 
+console.log(process.env.NEXT_PUBLIC_CHAIN)
+
 export const CustomThirdwebProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <ThirdwebProvider
-      activeChain={process.env.NEXT_PUBLIC_CHAIN}
+      activeChain={137}
       clientId={process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID}
       locale={en()}
       supportedWallets={[

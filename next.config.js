@@ -1,9 +1,45 @@
 /** @type {import('next').NextConfig} */
-const { withGluestackUI } = require("@gluestack/ui-next-adapter")
-
-const nextConfig = {
-  reactStrictMode: true,
-  transpilePackages: ["@gluestack-ui/themed"],
-}
-
-module.exports = withGluestackUI(nextConfig)
+module.exports = {
+  images: {
+    remotePatterns: [
+      {
+        hostname: 'v5.airtableusercontent.com',
+      },
+    ],
+  },
+  experimental: {
+    turbo: {
+      resolveAlias: {
+        "react-native": "react-native-web",
+      },
+      resolveExtensions: [
+        ".web.js",
+        ".web.jsx",
+        ".web.ts",
+        ".web.tsx",
+        ".mdx",
+        ".tsx",
+        ".ts",
+        ".jsx",
+        ".js",
+        ".mjs",
+        ".json",
+      ],
+    },
+  },
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      // Transform all direct `react-native` imports to `react-native-web`
+      "react-native$": "react-native-web",
+    };
+    config.resolve.extensions = [
+      ".web.js",
+      ".web.jsx",
+      ".web.ts",
+      ".web.tsx",
+      ...config.resolve.extensions,
+    ];
+    return config;
+  },
+};

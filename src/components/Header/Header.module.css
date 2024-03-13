@@ -1,0 +1,16 @@
+.container {
+
+}
+
+.mobileContainer {
+  height: 100vh !important;
+  opacity: 1;
+  background: rgb(0, 0, 0);
+  left: 0px;
+  display: flex;
+  padding: 16px;
+  /* z-index: 99 !important; */
+  /* position: absolute; */
+  border-radius: 14px;
+  text-align: center;
+}

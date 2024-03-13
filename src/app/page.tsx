@@ -12,6 +12,8 @@ import {
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import { Navbar } from "@/components/Navbar";
+import { Header } from "@/components/Header/Header";
+import { Hero } from "@/components/Hero/Hero";
 
 export default function Home() {
   const NFT_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS!;
@@ -37,7 +39,9 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      <ConnectWallet />
+      <Header />
+      <Hero />
+      {/* <NftCard /> */}
       <h1 className={styles.title}>Your Assets</h1>
       <h2>
         TOTAL ITEMS: <span>{nftBalance?.toNumber()}</span>

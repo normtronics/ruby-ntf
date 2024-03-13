@@ -112,7 +112,6 @@ exports.Prisma.NFTScalarFieldEnum = {
   name: 'name',
   description: 'description',
   minted: 'minted',
-  unlimited: 'unlimited',
   image: 'image',
   owner: 'owner',
   createdAt: 'createdAt',

@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "./prisma/generated/client/index.js";
 import qrcode from "qrcode";
 
 if (process.env.NODE_ENV === "production") {
@@ -15,14 +15,14 @@ const main = async () => {
   try {
     const nfts = await prisma.nFT.findMany({
       where: {
-        minted: false,
+        minted: true,
       },
     });
 
     for (const nft of nfts) {
       await qrcode.toFile(
-        `./qrs/${nft.id}.png`,
-        `http://localhost:3000/claim?id=${nft.id}`
+        `./public/qrs/${nft.id}.png`,
+        `https://nfts-one.vercel.app//claim?id=${nft.id}`
       );
     }
   } catch (e) {

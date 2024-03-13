@@ -1,14 +1,13 @@
 'use client'
 import { CustomThirdwebProvider } from "../components/ThirdwebProvider";
-import { GluestackUIProvider } from "@gluestack-ui/themed"
-import { config } from "@gluestack-ui/config"
+import { ThemeProvider } from "@material-tailwind/react";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-      <GluestackUIProvider config={config}>
-        <CustomThirdwebProvider>
-          {children}
-        </CustomThirdwebProvider>
-      </GluestackUIProvider>
+    <ThemeProvider>
+      <CustomThirdwebProvider>
+        {children}
+      </CustomThirdwebProvider>
+    </ThemeProvider>
   )
 }
