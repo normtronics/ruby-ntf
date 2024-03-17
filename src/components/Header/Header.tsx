@@ -96,7 +96,7 @@ export function Header() {
             THE ROSE CRIB
           </div>
         </Typography>
-        <div className="hidden lg:block">{navList}</div>
+        {/* <div className="hidden lg:block">{navList}</div> */}
         <div className="flex items-center gap-x-1 hidden lg:inline-block">
           <ConnectWallet />
         </div>

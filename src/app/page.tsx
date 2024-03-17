@@ -40,14 +40,14 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Header />
-      <Hero />
+      {/* <Hero /> */}
       {/* <NftCard /> */}
       <h1 className={styles.title}>Your Assets</h1>
       <h2>
         TOTAL ITEMS: <span>{nftBalance?.toNumber()}</span>
       </h2>
 
-      <ConnectWallet 
+      {/* <ConnectWallet 
         className={styles.connectBtn}
         theme={"dark"}
         modalTitle={"The Rose Crib"}
@@ -58,7 +58,7 @@ export default function Home() {
             console.log('token', token)
           }
         }}
-      />
+      /> */}
 
       {!address && <h1>Connect your wallet</h1>}
       {address && isLoading && <h1>Loading...</h1>}
@@ -66,7 +66,7 @@ export default function Home() {
       <div className={styles.nfts}>
         {nfts?.map(({ metadata }) => (
           <Link
-            href={`https://thirdweb.com/mumbai/${process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS}/nfts/0/${metadata.id}`}
+            href={`https://thirdweb.com/${process.env.NEXT_PUBLIC_CHAIN}/${process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS}/nfts/${metadata.id}`}
             target="_blank"
             rel="noopener noreferrer"
             key={metadata.id}

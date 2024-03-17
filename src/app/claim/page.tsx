@@ -2,6 +2,7 @@ import Button from "../../components/Button";
 import { MediaRenderer } from "../../components/MediaRenderer";
 import prisma from "../../utils/prisma";
 import styles from "../../styles/Claim.module.css";
+import { Header } from "@/components/Header/Header";
 
 async function getData(id: string) {
   const nft = await prisma.nFT.findUnique({

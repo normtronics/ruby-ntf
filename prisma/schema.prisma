@@ -18,10 +18,16 @@ model NFT {
   id          String   @id @default(cuid()) @map("_id")
   name        String
   description String
-  minted      Boolean
   image       String
-  owner       String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   attributes  Json
+  // owner       User     @relation(fields: [ownerId], references: [id])
+  // ownerId     String // relation scalar field  (used in the `@relation` attribute above)
+}
+
+model User {
+  id      String @id @default(cuid()) @map("_id")
+  address String
+  // nfts    NFT[]
 }

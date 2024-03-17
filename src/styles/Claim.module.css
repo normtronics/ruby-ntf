@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 1440px;
   padding: 1.5rem 0;
-  margin: 100px auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,7 +16,7 @@
   margin-bottom: 2rem;
   self-align: center;
   margin: 0 auto;
-  color: #646d7a;
+  /* color: #646d7a; */
 }
 
 .title span {
@@ -31,18 +31,19 @@
 }
 
 .nft > h2 {
-  color: #646d7a;
+  /* color: #646d7a; */
   text-transform: uppercase;
   font-weight: 700;
-  font-size: 1.25rem;
+  /* font-size: 1.25rem; */
 }
 
 .nft > p {
-  color: #646d7a;
+  /* color: #646d7a; */
   font-size: 1rem;
   font-weight: 400;
   margin: 0.75rem 0;
   padding: 0 1rem;
+  text-align: center;
 }
 
 .attributes {

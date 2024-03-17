@@ -1,13 +1,13 @@
 const NFTs = [
   {
-    name: "Blue Circle",
-    description: "A blue circle NFT from the Shapes Collection",
+    name: "The Rose Crib Social Club Pass #1",
+    description: "This NFT is a digital representation of membership to The Rose Crib social club. This will give you access to future events",
     image:
-      "ipfs://QmPL8z4axPydaRK9wq3Pso2z5gfnDVcgTjf6yx88v3amr2/blue_circle.png",
+      "ipfs://QmTdTzaUdrHaZzSpgxypYYhnY6GZnRobJRUsG8nDTHvsx5/bb10NFT.png",
     attributes: {
-      shape: "circle",
-      color: "blue",
-      sides: "0",
+      edition: "first",
+      color: "black",
+      eventReleaseAt: "bb10"
     },
   },
 ];
@@ -26,14 +26,14 @@ if (process.env.NODE_ENV === "production") {
 
 const main = async () => {
   try {
-    await prisma.nFT.createMany({
+    const data = await prisma.nFT.createMany({
       data: NFTs.map((nft) => ({
         ...nft,
-        minted: false,
+        // minted: false,
       })),
     });
 
-    console.log("NFTs added to DB");
+    console.log("NFTs added to DB", data);
   } catch (e) {
     console.error(e);
   }

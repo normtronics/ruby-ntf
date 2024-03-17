@@ -111,12 +111,15 @@ exports.Prisma.NFTScalarFieldEnum = {
   id: 'id',
   name: 'name',
   description: 'description',
-  minted: 'minted',
   image: 'image',
-  owner: 'owner',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   attributes: 'attributes'
+};
+
+exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  address: 'address'
 };
 
 exports.Prisma.SortOrder = {
@@ -139,14 +142,10 @@ exports.Prisma.JsonNullValueFilter = {
   AnyNull: Prisma.AnyNull
 };
 
-exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
-};
-
 
 exports.Prisma.ModelName = {
-  NFT: 'NFT'
+  NFT: 'NFT',
+  User: 'User'
 };
 
 /**
