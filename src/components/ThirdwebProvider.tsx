@@ -16,7 +16,6 @@ export const CustomThirdwebProvider: FC<{ children: React.ReactNode }> = ({ chil
         metamaskWallet({ recommended: true }),
         coinbaseWallet(),
         walletConnect(),
-        localWallet(),
         embeddedWallet({
           auth: {
             options: [
