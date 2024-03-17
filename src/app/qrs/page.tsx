@@ -6,9 +6,6 @@ export const revalidate = 3600;
 
 async function getData() {
   const nfts = await prisma.nFT.findMany({
-    where: {
-      minted: false,
-    },
     take: 30,
   });
 
