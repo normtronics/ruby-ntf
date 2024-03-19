@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   applicationName: "The Rose Crib NFTs",
   authors: [{
     name: 'The Rose Crib',
-    url: 'https://therosecrib.xyz/'
+    url: 'https://nft.therosecrib.xyz/'
   }],
   keywords: 'music, nft, nfts',
   openGraph: {
@@ -20,24 +20,24 @@ export const metadata: Metadata = {
     description,
     emails: ['info@therosecrib.com'],
     siteName: 'The Rose Crib NFTs',
-    url: 'https://therosecrib.xyz/',
+    url: 'https://nft.therosecrib.xyz/',
     images: [{
-      url: 'https://therosecrib.xyz/bb10NFT.png',
-      secureUrl: 'https://therosecrib.xyz/bb10NFT.png',
+      url: 'https://nft.therosecrib.xyz/bb10NFT.png',
+      secureUrl: 'https://nft.therosecrib.xyz/bb10NFT.png',
       type: 'png',
     }],
     countryName: 'USA',
   },
   twitter: {
     card: 'summary',
-    site: 'https://therosecrib.xyz/',
-    creator: 'Ruby Mountain',
+    site: 'https://nft.therosecrib.xyz/',
+    creator: 'The Rose Crib',
     description,
     title,
     images: [{
-      url: 'https://therosecrib.xyz/bb10NFT.png',
-      secureUrl: 'https://therosecrib.xyz/bb10NFT.png',
-      type: 'webp',
+      url: 'https://nft.therosecrib.xyz/bb10NFT.png',
+      secureUrl: 'https://nft.therosecrib.xyz/bb10NFT.png',
+      type: 'png',
     }],
   },
   creator: 'The Rose Crib',
