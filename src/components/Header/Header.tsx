@@ -97,10 +97,10 @@ export function Header() {
           </div>
         </Typography>
         {/* <div className="hidden lg:block">{navList}</div> */}
-        <div className="flex items-center gap-x-1 hidden lg:inline-block">
+        <div className="flex items-center gap-x-1 lg:inline-block">
           <ConnectWallet />
         </div>
-        <IconButton
+        {/* <IconButton
           variant="text"
           className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
           ripple={false}
@@ -137,7 +137,7 @@ export function Header() {
               />
             </svg>
           )}
-        </IconButton>
+        </IconButton> */}
       </div>
       {/* <MobileNav 
         open={openNav}
