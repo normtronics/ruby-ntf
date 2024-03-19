@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import "./globals.css";
 import { Providers } from './providers'
 
 const title = 'The Rose Crib NFTs'
