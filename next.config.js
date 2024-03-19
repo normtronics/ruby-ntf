@@ -1,12 +1,5 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
-  images: {
-    remotePatterns: [
-      {
-        hostname: 'v5.airtableusercontent.com',
-      },
-    ],
-  },
   experimental: {
     turbo: {
       resolveAlias: {
