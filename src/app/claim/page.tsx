@@ -3,7 +3,79 @@ import { MediaRenderer } from "../../components/MediaRenderer";
 import prisma from "../../utils/prisma";
 import styles from "../../styles/Claim.module.css";
 import { Header } from "@/components/Header/Header";
-import Head from "next/head";
+import { Metadata, ResolvingMetadata } from "next";
+
+const title = 'The Rose Crib NFTs'
+const description = 'The Rose Crib NFTs'
+
+const metadata: Metadata = {
+  title,
+  description,
+  applicationName: "The Rose Crib NFTs",
+  authors: [{
+    name: 'The Rose Crib',
+    url: 'https://nft.therosecrib.xyz/'
+  }],
+  keywords: 'music, nft, nfts',
+  openGraph: {
+    type: 'website',
+    title,
+    description,
+    emails: ['info@therosecrib.com'],
+    siteName: 'The Rose Crib NFTs',
+    url: '',
+    images: [{
+      url: 'https://nft.therosecrib.xyz/bb10NFT.png',
+      secureUrl: 'https://nft.therosecrib.xyz/bb10NFT.png',
+      type: 'png',
+    }],
+    countryName: 'USA',
+  },
+  twitter: {
+    card: 'summary',
+    site: 'https://nft.therosecrib.xyz/',
+    creator: 'The Rose Crib',
+    description,
+    title,
+    images: [{
+      url: 'https://nft.therosecrib.xyz/bb10NFT.png',
+      secureUrl: 'https://nft.therosecrib.xyz/bb10NFT.png',
+      type: 'png',
+    }],
+  },
+  creator: 'The Rose Crib',
+}
+
+type Props = {
+  params: { id: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // read route params
+  const id = searchParams.id
+ 
+  return {
+    ...metadata,
+    openGraph: {
+      type: 'website',
+      title,
+      description,
+      emails: ['info@therosecrib.com'],
+      siteName: 'The Rose Crib NFTs',
+      url: `https://nft.therosecrib.xyz/claim?id=${id}`,
+      images: [{
+        url: 'https://nft.therosecrib.xyz/bb10NFT.png',
+        secureUrl: 'https://nft.therosecrib.xyz/bb10NFT.png',
+        type: 'png',
+      }],
+      countryName: 'USA',
+      },
+  }
+}
 
 
 async function getData(id: string) {
