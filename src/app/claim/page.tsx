@@ -18,6 +18,7 @@ async function getData(id: string) {
   return { nft: JSON.stringify(nft) };
 }
 
+// eslint-disable-next-line @next/next/no-async-client-component
 export default async function ClaimPage({
   searchParams,
 }: {
@@ -27,6 +28,7 @@ export default async function ClaimPage({
 
   return (
     <div className={styles.container}>
+      <Header />
       {nft.minted ? (
         <h1 className={styles.title}>NFT has already been claimed</h1>
       ) : (
