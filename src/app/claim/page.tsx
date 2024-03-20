@@ -3,6 +3,8 @@ import { MediaRenderer } from "../../components/MediaRenderer";
 import prisma from "../../utils/prisma";
 import styles from "../../styles/Claim.module.css";
 import { Header } from "@/components/Header/Header";
+import Head from "next/head";
+
 
 async function getData(id: string) {
   const nft = await prisma.nFT.findUnique({
@@ -28,6 +30,24 @@ export default async function ClaimPage({
 
   return (
     <div className={styles.container}>
+      <Head>
+        <title>The Rose Crib NFTs</title>
+        <meta name="description" content="The Rose Crib NFTs" />
+
+        <meta property="og:url" content="https://nft.therosecrib.xyz/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="The Rose Crib NFTs" />
+        <meta property="og:description" content="The Rose Crib NFTs" />
+        <meta property="og:image" content="https://nft.therosecrib.xyz/bb10NFT.png" />
+
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="nft.therosecrib.xyz" />
+        <meta property="twitter:url" content="https://nft.therosecrib.xyz/" />
+        <meta name="twitter:title" content="The Rose Crib NFTs" />
+        <meta name="twitter:description" content="The Rose Crib NFTs" />
+        <meta name="twitter:image" content="https://nft.therosecrib.xyz/bb10NFT.png" />
+      </Head>
       <Header />
       {nft.minted ? (
         <h1 className={styles.title}>NFT has already been claimed</h1>
