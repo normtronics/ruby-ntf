@@ -33,7 +33,7 @@ export default async function ClaimPage({
         <h1 className={styles.title}>NFT has already been claimed</h1>
       ) : (
         <h1 className={styles.title}>
-          You&apos;ve discovered a<br />
+          You&apos;ve discovered the<br />
           <span className={styles.blue}>&apos;{nft.name}&apos; NFT</span>.
         </h1>
       )}
@@ -61,6 +61,7 @@ export default async function ClaimPage({
       </div>
 
       <Button id={searchParams.id} />
+      <p>Press &apos;connect wallet&apos; to sign-up and claim your digital collectable</p>
 
       {/* {!nft.minted && <Button id={searchParams.id} />} */}
     </div>
