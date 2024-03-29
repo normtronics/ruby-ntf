@@ -14,3 +14,9 @@
   border-radius: 14px;
   text-align: center;
 }
+
+.title {
+  @media only screen and (max-width: 600px) {
+    font-size: 16px !important;
+  }
+}

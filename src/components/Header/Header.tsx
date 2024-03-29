@@ -75,7 +75,7 @@ export function Header() {
    <Navbar
     variant='filled'
     color='transparent'
-    className="sticky top-0 z-10 h-max mx-auto max-w-screen-2xl from-blue-gray-900 to-blue-gray-800 px-0 py-1"
+    className="top-0 z-10 h-max mx-auto max-w-screen-2xl from-blue-gray-900 to-blue-gray-800 px-0 py-1 headerbar"
     placeholder={''}
   >
       <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
@@ -87,15 +87,8 @@ export function Header() {
           className="mr-4 cursor-pointer font-bold"
           placeholder={''}
         >
-          <div className="inline-flex gap-3 items-center">
-            <Image
-              priority
-              src="/logo.svg"
-              height={16}
-              width={16}
-              alt="The Rose Crib"
-            />
-            THE ROSE CRIB
+          <div className={`inline-flex gap-3 items-center ${styles.title}`}>
+            RUBY MOUNTAIN NFT
           </div>
         </Typography>
         {/* <div className="hidden lg:block">{navList}</div> */}

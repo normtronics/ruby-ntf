@@ -1,20 +1,24 @@
+
 import Button from "../../components/Button";
 import { MediaRenderer } from "../../components/MediaRenderer";
 import prisma from "../../utils/prisma";
 import styles from "../../styles/Claim.module.css";
 import { Header } from "@/components/Header/Header";
 import { Metadata, ResolvingMetadata } from "next";
+import React from "react";
+import { CountdownTimer } from "@/components/count-down/count-down";
+import { SimpleFooter } from "@/components/footer/footer";
 
-const title = 'The Rose Crib NFTs'
-const description = 'The Rose Crib NFTs'
+const title = 'Ruby Mountain NFTs'
+const description = 'Ruby Mountain NFTs'
 
 const metadata: Metadata = {
   title,
   description,
-  applicationName: "The Rose Crib NFTs",
+  applicationName: "Ruby Mountain NFTs",
   authors: [{
-    name: 'The Rose Crib',
-    url: 'https://nft.therosecrib.xyz/'
+    name: 'Ruby Mountain',
+    url: 'https://nft.rubymountain.xyz/'
   }],
   keywords: 'music, nft, nfts',
   openGraph: {
@@ -22,28 +26,28 @@ const metadata: Metadata = {
     title,
     description,
     emails: ['info@therosecrib.com'],
-    siteName: 'The Rose Crib NFTs',
+    siteName: 'Ruby Mountain NFTs',
     url: '',
     images: [{
-      url: 'https://nft.therosecrib.xyz/bb10NFT.png',
-      secureUrl: 'https://nft.therosecrib.xyz/bb10NFT.png',
+      url: 'https://nft.rubymountain.xyz/bb10NFT.png',
+      secureUrl: 'https://nft.rubymountain.xyz/bb10NFT.png',
       type: 'png',
     }],
     countryName: 'USA',
   },
   twitter: {
     card: 'summary',
-    site: 'https://nft.therosecrib.xyz/',
-    creator: 'The Rose Crib',
+    site: 'https://nft.rubymountain.xyz/',
+    creator: 'Ruby Mountain',
     description,
     title,
     images: [{
-      url: 'https://nft.therosecrib.xyz/bb10NFT.png',
-      secureUrl: 'https://nft.therosecrib.xyz/bb10NFT.png',
+      url: 'https://nft.rubymountain.xyz/bb10NFT.png',
+      secureUrl: 'https://nft.rubymountain.xyz/bb10NFT.png',
       type: 'png',
     }],
   },
-  creator: 'The Rose Crib',
+  creator: 'Ruby Mountain',
 }
 
 type Props = {
@@ -66,17 +70,16 @@ export async function generateMetadata(
       description,
       emails: ['info@therosecrib.com'],
       siteName: 'The Rose Crib NFTs',
-      url: `https://nft.therosecrib.xyz/claim?id=${id}`,
+      url: `https://nft.rubymountain.xyz/claim?id=${id}`,
       images: [{
-        url: 'https://nft.therosecrib.xyz/bb10NFT.png',
-        secureUrl: 'https://nft.therosecrib.xyz/bb10NFT.png',
+        url: 'https://nft.rubymountain.xyz/bb10NFT.png',
+        secureUrl: 'https://nft.rubymountain.xyz/bb10NFT.png',
         type: 'png',
       }],
       countryName: 'USA',
       },
   }
 }
-
 
 async function getData(id: string) {
   const nft = await prisma.nFT.findUnique({
@@ -99,46 +102,51 @@ export default async function ClaimPage({
 }) {
   const nft = JSON.parse((await getData(searchParams.id)).nft);
 
+  const THREE_DAYS_IN_MS = 3 * 24 * 60 * 60 * 1000;
+  const NOW_IN_MS = 1711727137973
+
+  const dateTimeAfterThreeDays = NOW_IN_MS + THREE_DAYS_IN_MS;
+ 
   return (
-    <div className={styles.container}>
+    <>
       <Header />
-      {nft.minted ? (
-        <h1 className={styles.title}>NFT has already been claimed</h1>
-      ) : (
-        <h1 className={styles.title}>
-          You&apos;ve discovered the<br />
-          <span className={styles.blue}>&apos;{nft.name}&apos; NFT</span>.
-        </h1>
-      )}
-      <div className={styles.nft}>
+      <div className={styles.container}>
+        <h1 className={styles.title}>{nft.name}</h1>
+        <h2 className={styles.creator}>Created By Ruby Mountain</h2>
+        {/* <CountdownTimer targetDate={dateTimeAfterThreeDays} /> */}
         <MediaRenderer
           src={nft.image}
           alt={nft.name}
-          width="250px"
-          height="250px"
+          width="356px"
+          height="356px"
+          className={styles.image}
         />
-        <h2>{nft.name}</h2>
-        <p>{nft.description}</p>
-        {/* @ts-ignore */}
-        <div className={styles.attributes}>
-          {Object.keys(nft.attributes).map((key) => (
-            <div key={key} className={styles.attribute}>
-              <p className={styles.attributeKey}>{key}</p>
-              <p className={styles.attributeValue}>
-                {/* @ts-ignore */}
-                {nft.attributes[key]}
-              </p>
-            </div>
-          ))}
+        <div className={styles.nft}>
+          <Button id={searchParams.id} />
+          <p className="disclaimer">Press <i>&quot;Connect Wallet&quot;</i> to sign-up and claim your digital collectable</p>
+
+          <br />
+          <h2>Description</h2>
+          <p className="description">{nft.description}</p>
+
+          {/* @ts-ignore */}
+          <br />
+          <h2>Traits</h2>
+          <div className={styles.attributes}>
+            {Object.keys(nft.attributes).map((key) => (
+              <div key={key} className={styles.attribute}>
+                <p className={styles.attributeKey}>{key}</p>
+                <p className={styles.attributeValue}>
+                  {/* @ts-ignore */}
+                  {nft.attributes[key]}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
+        {/* <NFTAccordion /> */}
       </div>
-
-      <Button id={searchParams.id} />
-      <br />
-      <br />
-      <p>Press &apos;connect wallet&apos; to sign-up and claim your digital collectable</p>
-
-      {/* {!nft.minted && <Button id={searchParams.id} />} */}
-    </div>
+      <SimpleFooter />
+    </>
   );
 }

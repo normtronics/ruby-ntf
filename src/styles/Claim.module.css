@@ -1,33 +1,61 @@
 .container {
   width: 100%;
   max-width: 1440px;
-  padding: 1.5rem 0;
+  /* padding: 1.5rem 0; */
   margin: 0 auto;
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
+  /* align-items: center;
+  justify-content: center; */
+  margin-top: 16px;
+}
+
+.creator {
+  display: inline-flex;
+  -webkit-box-align: center;
   align-items: center;
-  justify-content: center;
+  width: 100%;
+  color: rgb(255, 255, 255);
+  font-weight: 400;
 }
 
 .title {
-  font-size: 1.5rem;
+  /* font-size: 1.2rem; */
+  font-size: 30px;
   font-weight: 700;
-  text-align: center;
-  margin-bottom: 2rem;
-  self-align: center;
-  margin: 0 auto;
+  /* text-align: center; */
+  /* margin-bottom: 2rem; */
+  /* self-align: center;
+  margin: 0 auto; */
   /* color: #646d7a; */
+  display: inline-flex;
+  line-height: 27px;
 }
 
 .title span {
   color: #ececec;
 }
 
+.image {
+  object-fit: contain;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  background-color: #ffc0f8;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+  margin-top: 16px;
+}
+
 .nft {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center;
+  justify-content: center; */
 }
 
 .nft > h2 {
@@ -42,8 +70,9 @@
   font-size: 1rem;
   font-weight: 400;
   margin: 0.75rem 0;
-  padding: 0 1rem;
-  text-align: center;
+  /* padding: 0 1rem; */
+  /* text-align: center; */
+  margin-bottom: 0;
 }
 
 .attributes {
@@ -51,6 +80,9 @@
   align-items: center;
   justify-content: center;
   margin-top: 1rem;
+  width: 100%;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .attribute {
@@ -64,6 +96,7 @@
   min-width: 70px;
   padding: 15px 10px;
   gap: 5px;
+  width: 100%;
 }
 
 .attributeKey {
@@ -99,6 +132,6 @@
 }
 
 .connectBtn {
-  width: 85vw !important;
+  /* width: 85vw !important; */
   margin-top: 1.5rem !important;
 }

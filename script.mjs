@@ -1,13 +1,13 @@
 const NFTs = [
   {
-    name: "The Rose Crib Social Club Pass #1",
-    description: "This NFT is a digital representation of membership to The Rose Crib social club. This will give you access to future events",
+    name: "Ruby Mountain Self Portrait No. 1",
+    description: "Ruby Mountain Self Portrait No. 1",
     image:
-      "ipfs://QmTdTzaUdrHaZzSpgxypYYhnY6GZnRobJRUsG8nDTHvsx5/bb10NFT.png",
+      "ipfs://bafybeiclabgip3wyaoxo3i45ogefb3ym4tndrrpem4hb6dxf7j33w64cxu/IMG_3517-1%20(dragged).jpg",
     attributes: {
       edition: "first",
-      color: "black",
-      eventReleaseAt: "bb10"
+      color: "red",
+      artist: "ruby mountain"
     },
   },
 ];
