@@ -6,12 +6,22 @@ import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
 import styles from "../styles/Claim.module.css";
 import prisma from "../utils/prisma";
 import { useRouter } from 'next/navigation'
+import React from "react";
+import {
+  Button as MButton,
+  Dialog,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
+} from "@material-tailwind/react";
 
 
 const Button: FC<{ id: string }> = ({ id }) => {
   const address = useAddress();
   const [loading, setLoading] = useState(false);
   const router = useRouter()
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(!open);
 
   const claim = async () => {
     setLoading(true);
@@ -21,7 +31,7 @@ const Button: FC<{ id: string }> = ({ id }) => {
         address,
       });
 
-      alert("NFT claimed!");
+      handleOpen()
       router.push('/')
     } catch (err) {
       alert(`Error claiming NFT: ${err}`);
@@ -29,6 +39,8 @@ const Button: FC<{ id: string }> = ({ id }) => {
       setLoading(false);
     }
   };
+
+  
 
   return (
     <>
@@ -57,6 +69,18 @@ const Button: FC<{ id: string }> = ({ id }) => {
           }
         }}
       />
+      <Dialog open={open} handler={handleOpen} placeholder={''}>
+        <DialogHeader placeholder={''}>Thank you! </DialogHeader>
+        <DialogBody placeholder={''}>
+          Thank you for claiming my NFT!
+          You will be redirected back to the home page at nft.rubymountain.xyz, and there you can view your claimed NFT.
+        </DialogBody>
+        <DialogFooter placeholder={''}>
+          <MButton variant="gradient" color="green" onClick={() => { handleOpen(); router.push('/'); }} placeholder={''}>
+            <span>Close</span>
+          </MButton>
+        </DialogFooter>
+      </Dialog>
     </>
   );
 };
