@@ -113,7 +113,6 @@ export default async function ClaimPage({
       <div className={styles.container}>
         <h1 className={styles.title}>{nft.name}</h1>
         <h2 className={styles.creator}>Created By Ruby Mountain</h2>
-        {/* <CountdownTimer targetDate={dateTimeAfterThreeDays} /> */}
         <MediaRenderer
           src={nft.image}
           alt={nft.name}
@@ -122,8 +121,14 @@ export default async function ClaimPage({
           className={styles.image}
         />
         <div className={styles.nft}>
-          <Button id={searchParams.id} />
-          <p className="disclaimer">Press <i>&quot;Connect Wallet&quot;</i> to sign-up and claim your digital collectable</p>
+          <div className="claimSection">
+            <div className="countdown">
+              Give away closes on
+              <div className="date">March, 29th at 11:59 PM</div>
+            </div>
+            <Button id={searchParams.id} />
+            <p className="disclaimer">Press <i>&quot;Connect Wallet&quot;</i> to sign-up with email or crypto wallet and claim your digital collectable</p>
+          </div>
 
           <br />
           <h2>Description</h2>

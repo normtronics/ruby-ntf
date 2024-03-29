@@ -44,7 +44,7 @@ const Button: FC<{ id: string }> = ({ id }) => {
       <ConnectWallet 
         className={styles.connectBtn}
         theme={"dark"}
-        modalTitle={"The Rose Crib"}
+        modalTitle={"Ruby Mountain"}
         switchToActiveChain={true}
         modalSize={"wide"}
         auth={{
