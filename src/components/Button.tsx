@@ -32,7 +32,6 @@ const Button: FC<{ id: string }> = ({ id }) => {
       });
 
       handleOpen()
-      router.push('/')
     } catch (err) {
       alert(`Error claiming NFT: ${err}`);
     } finally {
@@ -72,8 +71,7 @@ const Button: FC<{ id: string }> = ({ id }) => {
       <Dialog open={open} handler={handleOpen} placeholder={''}>
         <DialogHeader placeholder={''}>Thank you! </DialogHeader>
         <DialogBody placeholder={''}>
-          Thank you for claiming my NFT!
-          You will be redirected back to the home page at <b>nft.rubymountain.xyz</b>, and there you can view your claimed NFT.
+          Thank you for claiming my NFT! You will be redirected back to the home page at <b>nft.rubymountain.xyz</b>, and there you can view your claimed NFT. It may take a minute for it to display on your a assets page.
         </DialogBody>
         <DialogFooter placeholder={''}>
           <MButton variant="gradient" color="green" onClick={() => { handleOpen(); router.push('/'); }} placeholder={''}>
