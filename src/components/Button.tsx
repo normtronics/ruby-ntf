@@ -73,7 +73,7 @@ const Button: FC<{ id: string }> = ({ id }) => {
         <DialogHeader placeholder={''}>Thank you! </DialogHeader>
         <DialogBody placeholder={''}>
           Thank you for claiming my NFT!
-          You will be redirected back to the home page at nft.rubymountain.xyz, and there you can view your claimed NFT.
+          You will be redirected back to the home page at <b>nft.rubymountain.xyz</b>, and there you can view your claimed NFT.
         </DialogBody>
         <DialogFooter placeholder={''}>
           <MButton variant="gradient" color="green" onClick={() => { handleOpen(); router.push('/'); }} placeholder={''}>
