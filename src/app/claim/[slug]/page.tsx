@@ -8,8 +8,6 @@ import React from "react";
 import { SimpleFooter } from "@/components/footer/footer";
 import { gql, GraphQLClient } from "graphql-request";
 
-const title = 'Ruby Mountain NFTs'
-const description = 'Ruby Mountain NFTs'
 
 type Props = {
   params: { slug: string } 
@@ -35,8 +33,8 @@ export async function generateMetadata(
   const { nft } = await getData(slug)  
   const image = nft.image.replace("ipfs://", "https://ipfs.io/ipfs/")
   return {
-    title,
-    description,
+    title: nft.title,
+    description: nft.description,
     applicationName: "Ruby Mountain NFTs",
     authors: [{
       name: 'Ruby Mountain',
@@ -47,8 +45,8 @@ export async function generateMetadata(
       card: 'summary',
       site: 'https://nft.rubymountain.xyz/',
       creator: 'Ruby Mountain',
-      description,
-      title,
+      description: nft.description,
+      title: nft.title,
       images: [{
         url: image,
         secureUrl: image,
@@ -58,8 +56,8 @@ export async function generateMetadata(
     creator: 'Ruby Mountain',
     openGraph: {
       type: 'website',
-      title,
-      description,
+      title: nft.title,
+      description: nft.description,
       emails: ['info@therosecrib.com'],
       siteName: 'The Rose Crib NFTs',
       url: `https://nft.rubymountain.xyz/${slug}`,
