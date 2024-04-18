@@ -11,6 +11,7 @@ import {
 import { ConnectWallet } from "@thirdweb-dev/react";
 import Image from 'next/image';
 import styles from './Header.module.css'
+import Login from "../login/login";
  
 export function Header() {
   const [openNav, setOpenNav] = React.useState(false);
@@ -93,7 +94,7 @@ export function Header() {
         </Typography>
         {/* <div className="hidden lg:block">{navList}</div> */}
         <div className="flex items-center gap-x-1 lg:inline-block">
-          <ConnectWallet />
+          <Login />
         </div>
         {/* <IconButton
           variant="text"

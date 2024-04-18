@@ -138,7 +138,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/christophernorman/Documents/node/nft/rose-nft/prisma/generated/client",
+      "value": "/Users/christophernorman/Documents/node/ruby-ntf/prisma/generated/client",
       "fromEnvVar": null
     },
     "config": {
@@ -147,7 +147,7 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "darwin-arm64",
+        "value": "darwin",
         "native": true
       }
     ],
@@ -165,6 +165,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {

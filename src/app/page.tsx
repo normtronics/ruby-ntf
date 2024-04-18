@@ -4,6 +4,7 @@ import {
   ConnectWallet,
   ThirdwebNftMedia,
   useAddress,
+  useAuth,
   useContract,
   useNFT,
   useNFTBalance,
@@ -19,15 +20,13 @@ export default function Home() {
   const NFT_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS!;
   const { data: contract } = useContract(NFT_CONTRACT_ADDRESS);
   const address = useAddress();
-  console.log('contract', address)
   const { data: nfts, isLoading, isError, isFetched, isLoadingError } = useOwnedNFTs(contract, address);
   const { data: nftBalance } = useNFTBalance(contract, address);
   const { data: myNFT } = useNFT(contract, 0)
 
-  console.log('myNFT', myNFT)
-
-  console.log('isLoading', isLoading, isFetched, isLoadingError, nfts, address)
-
+  const thirdwebAuth = useAuth();
+  console.log('thirdwebAuth', thirdwebAuth)
+ 
   // if (isLoading && !isError) {
   //   return (
   //     <div className={styles.loadingContainer}>

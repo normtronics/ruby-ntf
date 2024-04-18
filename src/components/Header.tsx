@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "../../styles/Header.module.css";
 import { usePathname, useRouter } from "next/navigation";
+import Login from "./login/login";
 
 export const Header: FC = () => {
   const pathname = usePathname();
@@ -28,7 +29,7 @@ export const Header: FC = () => {
       </div>
 
       <div style={{ width: "200px" }}>
-        <ConnectWallet theme="dark" />
+        <Login />
       </div>
     </nav>
   );

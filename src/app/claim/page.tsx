@@ -132,7 +132,11 @@ export default async function ClaimPage({
 
           <br />
           <h2>Description</h2>
-          <p className="description">{nft.description}</p>
+          <p className="description">
+            {nft.description.split('\n').map((token: string) => (
+              {token}
+            ))}
+          </p>
 
           {/* @ts-ignore */}
           <br />

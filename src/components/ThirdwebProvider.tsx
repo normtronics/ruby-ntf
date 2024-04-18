@@ -10,6 +10,10 @@ export const CustomThirdwebProvider: FC<{ children: React.ReactNode }> = ({ chil
   return (
     <ThirdwebProvider
       activeChain={process.env.NEXT_PUBLIC_CHAIN}
+      authConfig={{
+        domain: process.env.NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN as string || '',
+        authUrl: "/api/auth/"
+      }}
       clientId={process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID}
       locale={en()}
       supportedWallets={[
@@ -20,9 +24,9 @@ export const CustomThirdwebProvider: FC<{ children: React.ReactNode }> = ({ chil
           auth: {
             options: [
               "email",
-              "google",
-              "apple",
-              "facebook",
+              // "google",
+              // "apple",
+              // "facebook",
             ],
           },
         }),
