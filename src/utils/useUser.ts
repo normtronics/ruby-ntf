@@ -3,7 +3,7 @@ import { signInWithCustomToken } from 'firebase/auth';
 import { doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
 import { useEffect } from 'react';
 import initializeFirebaseClient from './initFirebase';
-import useFirebaseUser from './useFIrebaseUser';
+import useFirebaseUser from './useFirebaseUser';
 
 export const useRadioUser = () => {
   const thirdWebUser = useUser();

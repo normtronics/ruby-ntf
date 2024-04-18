@@ -124,7 +124,7 @@ export default async function ClaimPage({
           <div className="claimSection">
             <div className="countdown">
               Give away closes on
-              <div className="date">March, 29th at 11:59 PM</div>
+              <div className="date">April, 28th at 11:59 PM</div>
             </div>
             <Button id={searchParams.id} />
             <p className="disclaimer">Press <i>&quot;Connect Wallet&quot;</i> to sign-up with email or crypto wallet and claim your digital collectable</p>
