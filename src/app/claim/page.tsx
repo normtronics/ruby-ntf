@@ -8,6 +8,7 @@ import { Metadata, ResolvingMetadata } from "next";
 import React from "react";
 import { CountdownTimer } from "@/components/count-down/count-down";
 import { SimpleFooter } from "@/components/footer/footer";
+import request, { gql, GraphQLClient } from "graphql-request";
 
 const title = 'Ruby Mountain NFTs'
 const description = 'Ruby Mountain NFTs'
@@ -81,18 +82,45 @@ export async function generateMetadata(
   }
 }
 
+interface NFT {
+  id: string,
+  description: string,
+  image: string,
+  slug: string,
+  title: string,
+  creator: string,
+  atributes: { [key: string]: string }
+}
+
 async function getData(id: string) {
-  const nft = await prisma.nFT.findUnique({
-    where: {
-      id,
+  console.log(process.env.NEXT_PUBLIC_HYGRAPH_URL, process.env.NEXT_PUBLIC_HYGRAPH_TOKEN)
+  const graphQLClient = new GraphQLClient(process.env.NEXT_PUBLIC_HYGRAPH_URL || '', {
+    headers: {
+      authorization: `Bearer ${process.env.NEXT_PUBLIC_HYGRAPH_TOKEN}`,
     },
-  });
+  })
 
-  if (!nft) {
-    throw new Error("NFT does not exist");
+  const query = gql`
+    query getNft($id: String!) {
+      nft(where: {slug: $id}) {
+        id
+        description
+        image
+        slug
+        title
+        creator
+        atributes
+      }
+    }
+  `
+
+  const variables = {
+    id: "ruby-mountain-rebirth-two",
   }
+  
+  const data = await graphQLClient.request<{ nft: NFT }>(query, variables)
 
-  return { nft: JSON.stringify(nft) };
+  return { nft: data.nft};
 }
 
 export default async function ClaimPage({
@@ -100,7 +128,7 @@ export default async function ClaimPage({
 }: {
   searchParams: { id: string };
 }) {
-  const nft = JSON.parse((await getData(searchParams.id)).nft);
+  const { nft } = await getData(searchParams.id)
 
   const THREE_DAYS_IN_MS = 3 * 24 * 60 * 60 * 1000;
   const NOW_IN_MS = 1711727137973
@@ -111,12 +139,12 @@ export default async function ClaimPage({
     <>
       <Header />
       <div className={styles.container}>
-        <h1 className={styles.title}>{nft.name}</h1>
+        <h1 className={styles.title}>{nft.title}</h1>
         <h2 className={styles.creator}>Created By Ruby Mountain</h2>
         <MediaRenderer
           src={nft.image}
-          alt={nft.name}
-          width="356px"
+          alt={nft.title}
+          width="100%"
           height="356px"
           className={styles.image}
         />
@@ -133,21 +161,19 @@ export default async function ClaimPage({
           <br />
           <h2>Description</h2>
           <p className="description">
-            {nft.description.split('\n').map((token: string) => (
-              {token}
-            ))}
+            {nft.description}
           </p>
 
           {/* @ts-ignore */}
           <br />
           <h2>Traits</h2>
           <div className={styles.attributes}>
-            {Object.keys(nft.attributes).map((key) => (
+            {Object.keys(nft.atributes).map((key) => (
               <div key={key} className={styles.attribute}>
                 <p className={styles.attributeKey}>{key}</p>
                 <p className={styles.attributeValue}>
                   {/* @ts-ignore */}
-                  {nft.attributes[key]}
+                  {nft.atributes[key]}
                 </p>
               </div>
             ))}
