@@ -117,9 +117,9 @@ export default async function ClaimPage({ params }: { params: { slug: string } }
   console.log(nft)
   const endDate = new Date(nft.end).toLocaleString()
 
-  if(checkExpired(endDate)) {
-    return null
-  }
+  // if(checkExpired(endDate)) {
+  //   return null
+  // }
  
   return (
     <>
