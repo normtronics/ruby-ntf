@@ -4,6 +4,7 @@ import initializeFirebaseClient from "./initFirebase";
 
 // Helpful hook for you to get the currently authenticated user in Firebase.
 export default function useFirebaseUser() {
+  
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState<User | null>(null);
   const { auth } = initializeFirebaseClient();
