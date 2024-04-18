@@ -1,3 +1,5 @@
+//@ts-ignore
+
 import { ThirdwebAuthAppRouter } from '@thirdweb-dev/auth/next';
 import { PrivateKeyWallet } from '@thirdweb-dev/auth/evm';
 
