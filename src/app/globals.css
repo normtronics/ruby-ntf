@@ -17,11 +17,17 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+body[data-scroll-locked] {
+  padding-left: 16px !important;
+  padding-top: 16px !important;
+  padding-right: 16px !important;
+}
+
 
 body {
   color: #ffffff;
   background: rgb(25, 28, 31);
-  padding: 16px;
+  padding: 16px !important;
 }
 
 .show-counter {
