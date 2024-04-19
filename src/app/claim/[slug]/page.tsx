@@ -79,7 +79,7 @@ async function getData(slug: string) {
         nftype
         start
         end
-        seoImagejk
+        seoImage
       }
     }
   `
