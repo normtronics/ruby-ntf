@@ -7,22 +7,11 @@ import { Metadata, ResolvingMetadata } from "next";
 import React from "react";
 import { SimpleFooter } from "@/components/footer/footer";
 import { gql, GraphQLClient } from "graphql-request";
+import { NFT } from "@/types/nft";
 
 
 type Props = {
   params: { slug: string } 
-}
-
-interface NFT {
-  id: string,
-  description: string,
-  image: string,
-  slug: string,
-  title: string,
-  creator: string,
-  atributes: { [key: string]: string },
-  end: string,
-  start: string,
 }
 
 export async function generateMetadata(
@@ -90,6 +79,7 @@ async function getData(slug: string) {
         nftype
         start
         end
+        seoImagejk
       }
     }
   `
@@ -142,7 +132,7 @@ export default async function ClaimPage({ params }: { params: { slug: string } }
               Give away closes on
               <div className="date">{endDate}</div>
             </div>
-            <Button id={slug} />
+            <Button nft={nft} />
             <p className="disclaimer">Press <i>&quot;Connect Wallet&quot;</i> to sign-up with email or crypto wallet and claim your digital collectable</p>
           </div>
 

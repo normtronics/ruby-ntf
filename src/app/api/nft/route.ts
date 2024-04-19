@@ -1,21 +1,19 @@
+import { NFT } from "@/types/nft";
 import { Engine } from "@thirdweb-dev/engine";
 import { NextResponse } from "next/server";
-import prisma from "../../../utils/prisma";
 
-export async function POST(req: Request) {
-  const { id, address } = await req.json();
+interface ExtendedNextApiRequest extends Request {
+  json: () => Promise<{ nft: NFT, address: string}>
+}
+
+export async function POST(req: ExtendedNextApiRequest) {
+  const { nft, address } = await req.json();
 
   const BACKEND_WALLET_ADDRESS = process.env.BACKEND_WALLET_ADDRESS!;
   const NFT_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS!;
   const CHAIN = process.env.NEXT_PUBLIC_CHAIN!;
 
   try {
-    const nft = await prisma.nFT.findUnique({
-      where: {
-        id,
-      },
-    });
-
     if (!nft) {
       return NextResponse.json({ error: "NFT not found" }, { status: 404 });
     }
@@ -31,22 +29,16 @@ export async function POST(req: Request) {
       BACKEND_WALLET_ADDRESS,
       {
         metadata: {
-          name: nft?.name,
-          description: nft?.description,
-          image: nft?.image,
+          name: nft.title,
+          description: nft.description,
+          image: nft.image,
+          //@ts-ignore
+          properties: nft.atributes,
+
         },
         receiver: address,
       }
     );
-
-    // await prisma.nFT.update({
-    //   where: {
-    //     id,
-    //   },
-    //   data: {
-    //     owner: address,
-    //   },
-    // });
 
     return NextResponse.json(tx, { status: 200 });
   } catch (e) {

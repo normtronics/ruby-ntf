@@ -14,9 +14,11 @@ import {
   DialogBody,
   DialogFooter,
 } from "@material-tailwind/react";
+import Login from "./login/login";
+import { NFT } from "@/types/nft";
 
 
-const Button: FC<{ id: string }> = ({ id }) => {
+const Button: FC<{ nft: NFT }> = ({ nft }) => {
   const address = useAddress();
   const [loading, setLoading] = useState(false);
   const router = useRouter()
@@ -27,7 +29,7 @@ const Button: FC<{ id: string }> = ({ id }) => {
     setLoading(true);
     try {
       await axios.post("/api/nft", {
-        id: id,
+        nft,
         address,
       });
 
@@ -43,7 +45,7 @@ const Button: FC<{ id: string }> = ({ id }) => {
 
   return (
     <>
-      {address && (
+      {address ? (
         <button
           className={styles.claimButton}
           onClick={() => claim()}
@@ -51,27 +53,13 @@ const Button: FC<{ id: string }> = ({ id }) => {
         >
           {loading ? "Claiming..." : "Claim"}
         </button>
+      ): (
+        <Login />
       )}
-      <ConnectWallet 
-        className={styles.connectBtn}
-        theme={"dark"}
-        modalTitle={"Ruby Mountain"}
-        switchToActiveChain={true}
-        modalSize={"wide"}
-        auth={{
-          onLogin: (token: string) => {
-          // prisma.user.upsert({
-          //   where: { email: email },
-          //   update: { ...user },
-          //   create: { ...user },
-          // });
-          }
-        }}
-      />
       <Dialog open={open} handler={handleOpen} placeholder={''}>
         <DialogHeader placeholder={''}>Thank you! </DialogHeader>
         <DialogBody placeholder={''}>
-          Thank you for claiming my NFT! You will be redirected back to the home page at <b>nft.rubymountain.xyz</b>, and there you can view your claimed NFT. It may take a minute for it to display on your a assets page.
+          Thank you for claiming my NFT! You will be redirected back to the home page at <b>nft.rubymountain.xyz</b>, and there you can view your claimed NFT. It may take a minute for it to display on your assets page.
         </DialogBody>
         <DialogFooter placeholder={''}>
           <MButton variant="gradient" color="green" onClick={() => { handleOpen(); router.push('/'); }} placeholder={''}>
