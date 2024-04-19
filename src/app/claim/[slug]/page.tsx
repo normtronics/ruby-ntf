@@ -8,6 +8,7 @@ import React from "react";
 import { SimpleFooter } from "@/components/footer/footer";
 import { gql, GraphQLClient } from "graphql-request";
 import { NFT } from "@/types/nft";
+import { useAddress, useContract, useOwnedNFTs } from "@thirdweb-dev/react";
 
 
 type Props = {
@@ -102,7 +103,6 @@ const checkExpired = (date: string) => {
 export default async function ClaimPage({ params }: { params: { slug: string } }) {
   const { slug } = params
   const { nft } = await getData(slug)
-  console.log(nft)
   const endDate = new Date(nft.end).toLocaleString()
 
   if(checkExpired(endDate)) {

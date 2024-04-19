@@ -25,7 +25,7 @@ export default function Home() {
   const { data: myNFT } = useNFT(contract, 0)
 
   const thirdwebAuth = useAuth();
-  console.log('thirdwebAuth', thirdwebAuth)
+  console.log('thirdwebAuth', nfts)
  
   // if (isLoading && !isError) {
   //   return (

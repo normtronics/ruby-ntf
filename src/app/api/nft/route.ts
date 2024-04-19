@@ -40,6 +40,8 @@ export async function POST(req: ExtendedNextApiRequest) {
       }
     );
 
+    console.log('tx', tx)
+
     return NextResponse.json(tx, { status: 200 });
   } catch (e) {
     console.error(e);

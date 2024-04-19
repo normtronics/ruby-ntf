@@ -2,9 +2,8 @@
 
 import { useState, type FC } from "react";
 import axios from "axios";
-import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
+import { useAddress } from "@thirdweb-dev/react";
 import styles from "../styles/Claim.module.css";
-import prisma from "../utils/prisma";
 import { useRouter } from 'next/navigation'
 import React from "react";
 import {
@@ -16,14 +15,22 @@ import {
 } from "@material-tailwind/react";
 import Login from "./login/login";
 import { NFT } from "@/types/nft";
+import { useRadioUser } from "@/utils/useUser";
+import { arrayUnion, doc, getDoc, setDoc } from "firebase/firestore";
+import useFirebaseUser from "@/utils/useFirebaseUser";
+import initializeFirebaseClient from "@/utils/initFirebase";
 
 
 const Button: FC<{ nft: NFT }> = ({ nft }) => {
   const address = useAddress();
   const [loading, setLoading] = useState(false);
   const router = useRouter()
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(!open);
+  const { user: firebaseUser, isLoading: loadingAuth } = useFirebaseUser();
+  const { auth, db } = initializeFirebaseClient();
+  // const usersRef = firebaseUser ? doc(db, 'users', firebaseUser.uid!) : null
+  // const [isClaimed, setIsClaimed] = useState()
 
   const claim = async () => {
     setLoading(true);
@@ -34,6 +41,17 @@ const Button: FC<{ nft: NFT }> = ({ nft }) => {
       });
 
       handleOpen()
+
+      const usersRef = doc(db, 'users', firebaseUser?.uid!);
+      const userDoc = await getDoc(usersRef);
+      if (userDoc.exists()) { 
+        setDoc(
+          usersRef,
+          { claimedNfts: arrayUnion(nft.title)},
+          { merge: true }
+        );
+      }
+
     } catch (err) {
       alert(`Error claiming NFT: ${err}`);
     } finally {
@@ -41,17 +59,33 @@ const Button: FC<{ nft: NFT }> = ({ nft }) => {
     }
   };
 
-  
+
+
+  // const showClaimText = async (loading: boolean) => {
+  //   const userDoc = await getDoc(usersRef);
+  //   if (userDoc.exists()) { 
+  //     const claimed = userDoc.data().claimedNfts.includes(nft.title)
+  //     setIsClaimed(claimed)
+  //     if(loading && !claimed) return 'Claiming...'
+  //     if(!loading && !claimed) return 'Claim'
+  //     if(!loading && claimed) return 'Already Claimed'
+  //   }
+
+   
+
+  //   return 'Claim'
+  // }
 
   return (
     <>
       {address ? (
+
         <button
           className={styles.claimButton}
           onClick={() => claim()}
           disabled={loading}
         >
-          {loading ? "Claiming..." : "Claim"}
+          {loading ? 'Claiming...' : 'Claim'}
         </button>
       ): (
         <Login />
