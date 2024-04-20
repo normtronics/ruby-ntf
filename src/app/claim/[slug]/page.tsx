@@ -103,7 +103,9 @@ const checkExpired = (date: string) => {
 export default async function ClaimPage({ params }: { params: { slug: string } }) {
   const { slug } = params
   const { nft } = await getData(slug)
-  const endDate = new Date(nft.end).toLocaleString()
+  const endDate = new Date(nft.end).toLocaleString("en-US", {
+    timeZone: "America/Los_Angeles"
+  })
 
   if(checkExpired(endDate)) {
     return (
@@ -130,7 +132,7 @@ export default async function ClaimPage({ params }: { params: { slug: string } }
           <div className="claimSection">
             <div className="countdown">
               Give away closes on
-              <div className="date">{endDate}</div>
+              <div className="date">{endDate} PST</div>
             </div>
             <Button nft={nft} />
             <p className="disclaimer">Press <i>&quot;Connect Wallet&quot;</i> to sign-up with email or crypto wallet and claim your digital collectable</p>
