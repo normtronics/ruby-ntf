@@ -4,7 +4,11 @@ import { Typography } from "@material-tailwind/react";
  
 export function SimpleFooter() {
   return (
-    <footer className="flex w-full flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 py-6 text-center md:justify-between">
+    <footer className="flex w-full flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 py-6 text-center md:justify-between" style={{
+        position: "absolute",
+        bottom: 0,
+        width: "100%"
+    }}>
       <Typography className="font-normal" placeholder={''}>
         &copy; 2024 Ruby Mountain
       </Typography>
