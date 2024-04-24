@@ -12,16 +12,17 @@ export async function POST(req: Request, res: Response) {
     NextResponse.json({ error: 'Auth Wrong' }, { status: 401 });
 
   try {
+    
     const {
-      data: { PUBLISHED },
+      operation,
+      data: hygraphData
     } = await req.json();
 
-    const { id: objectID, ...data } = PUBLISHED;
-
-    await index.saveObject({ objectID, ...data });
+    await index.saveObject({ objectID: hygraphData.id, ...hygraphData });
 
     return NextResponse.json({ error: "Search updated" }, { status: 200 })
   } catch (err) {
-    return  NextResponse.json({ error: 'Error' }, { status: 500 });
+    console.log(err)
+    return  NextResponse.json({ error: `Error ${err}`}, { status: 500 });
   }
 };
