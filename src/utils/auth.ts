@@ -6,7 +6,7 @@ export const { ThirdwebAuthHandler, getUser } = ThirdwebAuthAppRouter({
   wallet: new PrivateKeyWallet(process.env.THIRDWEB_AUTH_PRIVATE_KEY || ''),
   callbacks: {
     onLogin: async (address) => {
-      console.log('address', address);
+      // console.log('address', address);
     },
     onUser: async (user) => {
       try {

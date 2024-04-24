@@ -1,3 +1,4 @@
+import { AudioPlayer } from "@/components/audio-player/audio-player";
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from './providers'
@@ -52,7 +53,8 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-            {children}
+          {children}
+          <AudioPlayer />
         </Providers>
       </body>
     </html>

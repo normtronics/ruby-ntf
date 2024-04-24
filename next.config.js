@@ -20,6 +20,14 @@ module.exports = {
       ],
     },
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'f4.bcbits.com',
+      },
+    ],  
+  },
   webpack: (config) => {
     config.resolve.alias = {
       ...(config.resolve.alias || {}),

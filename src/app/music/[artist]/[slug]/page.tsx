@@ -1,15 +1,12 @@
-
-import Button from "../../../components/Button";
-import { MediaRenderer } from "../../../components/MediaRenderer";
-import styles from "../../../styles/Claim.module.css";
+import styles from "../../../../styles/Claim.module.css";
 import { Header } from "@/components/Header/Header";
 import { Metadata, ResolvingMetadata } from "next";
+import { MediaRenderer } from "../../../../components/MediaRenderer";
 import React from "react";
 import { SimpleFooter } from "@/components/footer/footer";
-import { gql, GraphQLClient } from "graphql-request";
-import { NFT } from "@/types/nft";
 import { useAddress, useContract, useOwnedNFTs } from "@thirdweb-dev/react";
 import { getNft } from "@/queries/getNft";
+import Button from "@/components/Button";
 
 
 type Props = {
@@ -22,7 +19,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { slug } = params
   const { nft } = await getData(slug)  
-  const image = nft.image.replace("ipfs://", "https://ipfs.io/ipfs/")
+  // const image = nft.image.replace("ipfs://", "https://ipfs.io/ipfs/")
   return {
     title: nft.title,
     description: nft.description,
@@ -39,8 +36,8 @@ export async function generateMetadata(
       description: nft.description,
       title: nft.title,
       images: [{
-        url: image,
-        secureUrl: image,
+        url: nft.image,
+        secureUrl: nft.image,
         type: 'png',
       }],
     },
@@ -53,8 +50,8 @@ export async function generateMetadata(
       siteName: 'The Rose Crib NFTs',
       url: `https://nft.rubymountain.xyz/${slug}`,
       images: [{
-        url: image,
-        secureUrl: image,
+        url: nft.image,
+        secureUrl: nft.image,
       }],
       countryName: 'USA',
     },
@@ -73,27 +70,22 @@ const checkExpired = (date: string) => {
   return today > end
 }
 
-export default async function ClaimPage({ params }: { params: { slug: string } }) {
+export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = params
   const { nft } = await getData(slug)
   const endDate = new Date(nft.end).toLocaleString("en-US", {
     timeZone: "America/Los_Angeles"
   })
 
-  if(checkExpired(endDate)) {
-    return (
-      <div>
-        This nft is unavailable 
-      </div>
-    )
-  }
- 
+
   return (
     <>
       <Header />
       <div className={styles.container}>
         <h1 className={styles.title}>{nft.title}</h1>
-        <h2 className={styles.creator}>Created By Ruby Mountain</h2>
+        <a href={`/creator/${nft.creator.name}`}>
+          <h2 className={styles.creator}>{nft.creator.name}</h2>
+        </a>
         <MediaRenderer
           src={nft.image}
           alt={nft.title}

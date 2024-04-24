@@ -39,7 +39,8 @@ export async function POST(req: ExtendedNextApiRequest) {
         receiver: address,
       }
     );
-
+    
+    // Store this in firebase
     console.log('tx', tx)
 
     return NextResponse.json(tx, { status: 200 });
