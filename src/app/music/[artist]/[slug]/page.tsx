@@ -104,7 +104,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
         />
         <BuyBox 
           type={"fixed"} 
-          amount={0} 
           nft={nft}
         />
         <Description description={nft.description}/>
