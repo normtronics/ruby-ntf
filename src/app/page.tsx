@@ -20,7 +20,6 @@ import { Suspense } from "react";
 export default async function Page() {
   const data = await getNfts()
   const nfts = data.nfts
-  console.log(nfts)
   // const NFT_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS!;
   // const { data: contract } = useContract(NFT_CONTRACT_ADDRESS);
 

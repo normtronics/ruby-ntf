@@ -42,8 +42,11 @@ export const AudioPlayer = (props: AudioPlayerParams) => {
 
   useEffect(() => {
     //@ts-ignore
-    ref.current.src = file
-  }, [])
+    if(ref.current && audioPlayer.url) {
+      ref.current.src = audioPlayer.url
+    }
+    
+  }, [audioPlayer.url])
 
   const onVolumeChange = (e: any) => {
     const { target } = e;
@@ -58,7 +61,6 @@ export const AudioPlayer = (props: AudioPlayerParams) => {
   }
 
   const onPlayClick = () => {
-    console.log('play', ref)
     if(ref.current) {
       if(audioPlayer.isPlaying){
         ref.current.pause()
@@ -181,7 +183,7 @@ export const AudioPlayer = (props: AudioPlayerParams) => {
   }, [])
 
   return (
-    <div className={styles.audioPlayer}>
+    <div className={`${styles.audioPlayer} ${audioPlayer.activated ? styles.active : ''}`}>
       <div className={styles.container}>
         <div className={styles.songTrack}>
           <input 
@@ -216,9 +218,9 @@ export const AudioPlayer = (props: AudioPlayerParams) => {
           </button>
           <div className={styles.bar}></div>
           <CurrentlyPlaying
-            image={'https://f4.bcbits.com/img/a3062479360_16.jpg'}
-            songTitle={audioPlayer.songTitle || 'Eclipse'}
-            artist={audioPlayer.artistName || 'Ruby Mountain'}
+            image={audioPlayer.image || ''}
+            songTitle={audioPlayer.songTitle || ''}
+            artist={audioPlayer.artistName || ''}
           />
           <div className={styles.bar}></div>
           <span 

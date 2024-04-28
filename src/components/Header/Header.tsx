@@ -5,6 +5,7 @@ import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
 import Image from 'next/image';
 import styles from './Header.module.css'
 import Login from "../login/login";
+import Link from "next/link";
  
 export function Header() {
   const [openNav, setOpenNav] = React.useState(false);
@@ -25,24 +26,20 @@ export function Header() {
         </div>
       </div>
       <div className={`${styles.title}`}>
-        RUBY MOUNTAIN
+        <Link href='/'>
+          RUBY MOUNTAIN
+        </Link>
       </div>
       <div className={`${styles.middle}`}> 
-        <a href="/music" >
-          <div>
-            Music
-          </div>
-        </a>
-        <a href="/art" >
-          <div>
-            Art
-          </div>
-        </a>
-        <a href="/video" >
-          <div>
-            Video
-          </div>
-        </a>
+        <Link href="/music" >
+          Music
+        </Link>
+        <Link href="/art" >
+          Art
+        </Link>
+        <Link href="/video" >
+          Video
+        </Link>
       </div>
       <div className={styles.login}>
         <Login />
@@ -66,42 +63,42 @@ export const MobileMenu = ({ close, isOpen }: { close: () => void, isOpen: boole
 
       <ul className={styles.mobileList}>
         <li>
-          <a href="">
+          <Link href="">
             Music
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="">
+          <Link href="">
             Art
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="">
+          <Link href="">
             Video
-          </a>
+          </Link>
         </li>
       </ul>
 
       <ul className={styles.mobileList}>
         <li>
-          <a href="">
+          <Link href="">
             EPK
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="">
+          <Link href="">
             Twitter
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="">
+          <Link href="">
             Instagram
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="">
+          <Link href="">
             Youtube
-          </a>
+          </Link>
         </li>
       </ul>
 

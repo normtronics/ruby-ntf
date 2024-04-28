@@ -41,6 +41,7 @@
   padding: 16px;
   transform:translateX(-100%);
   transition:all 200ms ease-in;
+  z-index: 999;
 }
 
 .mobileMenuOpen {
@@ -97,7 +98,9 @@
 
 @media (min-width:600px)  {
   .middle {
-    display: block;
+    display: flex;
+    gap: 20px;
+    text-transform: uppercase;
   }
 
   .hamburger {

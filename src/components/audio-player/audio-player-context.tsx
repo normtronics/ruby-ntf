@@ -1,3 +1,5 @@
+'use client'
+
 import { createContext, Dispatch, SetStateAction, useContext, useState } from 'react';
 
 export type AudioPlayer = {
@@ -13,6 +15,7 @@ export type AudioPlayer = {
   shuffle: boolean,
   queue: string[],
   currentPlayIndex: number
+  activated: boolean
 }
 
 interface AudioPlayerProps {
@@ -29,6 +32,7 @@ interface AudioPlayerProps {
   setShuffle: Dispatch<SetStateAction<boolean>>,
   setQueue: Dispatch<SetStateAction<string[]>>,
   setCurrentPlayIndex: Dispatch<SetStateAction<number>>
+  setIsActive: Dispatch<SetStateAction<boolean>>
 }
 
 
@@ -47,6 +51,7 @@ export const AudioPlayerProvider = ({ children }: { children: React.ReactNode}) 
   const [shuffle, setShuffle] = useState(false)
   const [queue, setQueue] = useState<string[]>([])
   const [currentPlayIndex, setCurrentPlayIndex] = useState(0)
+  const [activated, setIsActive] = useState(false)
 
   const initAudioPlayer: AudioPlayer = {
     currentTime,
@@ -60,7 +65,8 @@ export const AudioPlayerProvider = ({ children }: { children: React.ReactNode}) 
     repeated,
     shuffle,
     queue,
-    currentPlayIndex
+    currentPlayIndex,
+    activated
   }
  
   return (
@@ -77,7 +83,8 @@ export const AudioPlayerProvider = ({ children }: { children: React.ReactNode}) 
       setIsRepeated,
       setShuffle,
       setQueue,
-      setCurrentPlayIndex
+      setCurrentPlayIndex,
+      setIsActive
     }}>
       {children}
     </AudioPlayerContext.Provider>

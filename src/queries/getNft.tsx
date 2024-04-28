@@ -31,6 +31,12 @@ export const getNft = async (slug: string) => {
           name
         }
         nftype
+        metadata
+        songs {
+          title
+          url
+          image
+        }
       }
     }
   `

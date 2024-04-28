@@ -1,6 +1,7 @@
 import { NFT } from "@/types/nft";
 import { Engine } from "@thirdweb-dev/engine";
 import { NextResponse } from "next/server";
+import { metadata } from '../../layout';
 
 interface ExtendedNextApiRequest extends Request {
   json: () => Promise<{ nft: NFT, address: string}>
@@ -34,6 +35,7 @@ export async function POST(req: ExtendedNextApiRequest) {
           image: nft.image,
           //@ts-ignore
           properties: nft.atributes,
+          ...nft.metadata
 
         },
         receiver: address,

@@ -1,18 +1,19 @@
 import { AudioPlayer } from "@/components/audio-player/audio-player";
+import { OnBoarding } from "@/components/onboarding/onboarding";
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from './providers'
 
-const title = 'The Rose Crib NFTs'
-const description = 'The Rose Crib NFTs'
+const title = 'Ruby Mountain NFTs'
+const description = 'Ruby Mountain NFTs'
 
 export const metadata: Metadata = {
   title,
   description,
-  applicationName: "The Rose Crib NFTs",
+  applicationName: "Ruby Mountain NFTs",
   authors: [{
-    name: 'The Rose Crib',
-    url: 'https://nft.therosecrib.xyz/'
+    name: 'Ruby Mountain',
+    url: 'https://nft.rubymmountain.xyz/'
   }],
   keywords: 'music, nft, nfts',
   openGraph: {
@@ -20,24 +21,24 @@ export const metadata: Metadata = {
     title,
     description,
     emails: ['info@therosecrib.com'],
-    siteName: 'The Rose Crib NFTs',
-    url: 'https://nft.therosecrib.xyz/',
+    siteName: 'Ruby Mountain NFTs',
+    url: 'https://nft.rubymountain.xyz/',
     images: [{
-      url: 'https://nft.therosecrib.xyz/bb10NFT.png',
-      secureUrl: 'https://nft.therosecrib.xyz/bb10NFT.png',
+      url: 'https://nft.rubymountain.xyz/bb10NFT.png',
+      secureUrl: 'https://nft.rubymountain.xyz/bb10NFT.png',
       type: 'png',
     }],
     countryName: 'USA',
   },
   twitter: {
     card: 'summary',
-    site: 'https://nft.therosecrib.xyz/',
-    creator: 'The Rose Crib',
+    site: 'https://nft.rubymountain.xyz/',
+    creator: 'Ruby Mountain',
     description,
     title,
     images: [{
-      url: 'https://nft.therosecrib.xyz/bb10NFT.png',
-      secureUrl: 'https://nft.therosecrib.xyz/bb10NFT.png',
+      url: 'https://nft.rubymountain.xyz/bb10NFT.png',
+      secureUrl: 'https://nft.rubymountain.xyz/bb10NFT.png',
       type: 'png',
     }],
   },
@@ -54,6 +55,7 @@ export default function RootLayout({
       <body>
         <Providers>
           {children}
+          <OnBoarding />
           <AudioPlayer />
         </Providers>
       </body>

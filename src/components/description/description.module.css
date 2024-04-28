@@ -1,0 +1,13 @@
+.container {
+  margin-top: 24px;
+}
+
+.container h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #646d7a;
+  padding-bottom: 8px;
+}
+
+.description {
+  margin-top: 16px;
+}

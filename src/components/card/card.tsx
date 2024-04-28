@@ -22,22 +22,20 @@ export const Card = (props: CardProps) => {
   }, [])
 
   return (
-    <a
+    <Link
       href={`/${nft.nftype}/${nft.creator.slug}/${nft.slug}`}
     >
       <div className={`${styles.square} ${styles.fullImg}`}>
         <img src={nft.image} />
         <div className={styles.nftInfo}>
           <div className={styles.topInfo}>
-            <span>
-              <h2>{nft.title}</h2>
-            </span>
+            <h2>{nft.title}</h2>
           </div>
           <span className={styles.artist} onClick={goToArtistPage}>
             <div>{nft.creator.name}</div>
           </span>
         </div>
       </div>
-    </a>
+    </Link>
   )
 }

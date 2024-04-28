@@ -24,4 +24,10 @@ export type NFT = {
     name: string
   },
   nftype: string
+  metadata: any
+  songs: [{
+    title: string,
+    url: string,
+    image: string
+  }]
 }

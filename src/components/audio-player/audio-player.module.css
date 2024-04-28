@@ -13,6 +13,8 @@
   bottom: 0px;
   user-select: none;
   padding-bottom: 0px;
+  transform:translateY(100%);
+  transition:all 200ms ease-in;
 }
 
 .container {
@@ -230,6 +232,10 @@ input[type=range] {
   height: 20px;
   flex-shrink: 0;
   color: #ffffff;
+}
+.active {
+  transform:translateX(0%);
+  transition:all 200ms ease-in;
 }
 
 @media screen and (min-width: 650px) {

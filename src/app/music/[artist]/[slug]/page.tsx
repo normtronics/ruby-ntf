@@ -7,6 +7,11 @@ import { SimpleFooter } from "@/components/footer/footer";
 import { useAddress, useContract, useOwnedNFTs } from "@thirdweb-dev/react";
 import { getNft } from "@/queries/getNft";
 import Button from "@/components/Button";
+import { NftInfo } from "@/components/nft-info/nft-info";
+import { Description } from "@/components/description/description";
+import { Attributes } from "@/components/attribute-info/attribute-info";
+import { useAudioPlayerContext } from "@/components/audio-player/audio-player-context";
+import { BuyBox } from "@/components/buy-box/buy-box";
 
 
 type Props = {
@@ -19,19 +24,18 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { slug } = params
   const { nft } = await getData(slug)  
-  // const image = nft.image.replace("ipfs://", "https://ipfs.io/ipfs/")
   return {
     title: nft.title,
     description: nft.description,
-    applicationName: "Ruby Mountain NFTs",
+    applicationName: `${nft.creator.name} NFTs`,
     authors: [{
-      name: 'Ruby Mountain',
-      url: 'https://nft.rubymountain.xyz/'
+      name: nft.creator.name,
+      url: `https://nft.rubymountain.xyz/${nft.creator.slug}/${slug}`
     }],
     keywords: 'music, nft, nfts',
     twitter: {
       card: 'summary',
-      site: 'https://nft.rubymountain.xyz/',
+      site: `https://nft.rubymountain.xyz/${nft.creator.slug}/${slug}`,
       creator: 'Ruby Mountain',
       description: nft.description,
       title: nft.title,
@@ -41,14 +45,14 @@ export async function generateMetadata(
         type: 'png',
       }],
     },
-    creator: 'Ruby Mountain',
+    creator: nft.creator.name,
     openGraph: {
       type: 'website',
       title: nft.title,
       description: nft.description,
       emails: ['info@therosecrib.com'],
       siteName: 'The Rose Crib NFTs',
-      url: `https://nft.rubymountain.xyz/${slug}`,
+      url: `https://nft.rubymountain.xyz/${nft.creator.slug}/${slug}`,
       images: [{
         url: nft.image,
         secureUrl: nft.image,
@@ -71,6 +75,7 @@ const checkExpired = (date: string) => {
 }
 
 export default async function Page({ params }: { params: { slug: string } }) {
+
   const { slug } = params
   const { nft } = await getData(slug)
   const endDate = new Date(nft.end).toLocaleString("en-US", {
@@ -78,53 +83,35 @@ export default async function Page({ params }: { params: { slug: string } }) {
   })
 
 
+  if(!nft) {
+    return (
+      <>
+        Loading
+      </>
+    )
+  }
+
   return (
     <>
       <Header />
-      <div className={styles.container}>
-        <h1 className={styles.title}>{nft.title}</h1>
-        <a href={`/creator/${nft.creator.name}`}>
-          <h2 className={styles.creator}>{nft.creator.name}</h2>
-        </a>
-        <MediaRenderer
-          src={nft.image}
-          alt={nft.title}
-          width="100%"
-          height="356px"
-          className={styles.image}
+      {nft && <div className={styles.container}>
+        <img src={nft.image} alt={nft.title} className={styles.image}/>
+        <NftInfo 
+          name={nft.creator.name} 
+          title={nft.title} 
+          isMusic
+          nft={nft}
         />
+        <BuyBox 
+          type={"fixed"} 
+          amount={0} 
+          nft={nft}
+        />
+        <Description description={nft.description}/>
         <div className={styles.nft}>
-          <div className="claimSection">
-            <div className="countdown">
-              Give away closes on
-              <div className="date">{endDate} PST</div>
-            </div>
-            <Button nft={nft} />
-            <p className="disclaimer">Press <i>&quot;Connect Wallet&quot;</i> to sign-up with email or crypto wallet and claim your digital collectable</p>
-          </div>
-
-          <br />
-          <h2>Description</h2>
-          <p className="description">
-            {nft.description}
-          </p>
-
-          {/* @ts-ignore */}
-          <br />
-          <h2>Traits</h2>
-          <div className={styles.attributes}>
-            {Object.keys(nft.atributes).map((key) => (
-              <div key={key} className={styles.attribute}>
-                <p className={styles.attributeKey}>{key}</p>
-                <p className={styles.attributeValue}>
-                  {/* @ts-ignore */}
-                  {nft.atributes[key]}
-                </p>
-              </div>
-            ))}
-          </div>
+          <Attributes attributes={nft.atributes}/>
         </div>
-      </div>
+      </div> }
       <SimpleFooter />
     </>
   );
