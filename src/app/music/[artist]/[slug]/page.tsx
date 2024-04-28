@@ -104,10 +104,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
           isMusic
           nft={nft}
         />
-        <BuyBox 
+        {/* <BuyBox 
           type={"fixed"} 
           nft={nft}
-        />
+        /> */}
         <Description description={nft.description}/>
         <div className={styles.nft}>
           <Attributes attributes={nft.atributes}/>
