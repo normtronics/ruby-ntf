@@ -35,8 +35,6 @@ export async function POST(req: ExtendedNextApiRequest) {
           image: nft.image,
           //@ts-ignore
           properties: nft.atributes,
-          ...nft.metadata
-
         },
         receiver: address,
       }

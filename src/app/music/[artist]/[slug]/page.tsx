@@ -4,7 +4,7 @@ import { Metadata, ResolvingMetadata } from "next";
 import { MediaRenderer } from "../../../../components/MediaRenderer";
 import React from "react";
 import { SimpleFooter } from "@/components/footer/footer";
-import { useAddress, useContract, useOwnedNFTs } from "@thirdweb-dev/react";
+import { useAddress, useContract, useNFTBalance, useOwnedNFTs } from "@thirdweb-dev/react";
 import { getNft } from "@/queries/getNft";
 import Button from "@/components/Button";
 import { NftInfo } from "@/components/nft-info/nft-info";
@@ -78,6 +78,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   const { slug } = params
   const { nft } = await getData(slug)
+  console.log('nft', nft)
+
   const endDate = new Date(nft.end).toLocaleString("en-US", {
     timeZone: "America/Los_Angeles"
   })
