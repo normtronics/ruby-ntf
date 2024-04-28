@@ -4,14 +4,14 @@ import { NextResponse } from "next/server";
 import { metadata } from '../../layout';
 
 interface ExtendedNextApiRequest extends Request {
-  json: () => Promise<{ nft: NFT, address: string}>
+  json: () => Promise<{ nft: NFT, address: string, contract: string}>
 }
 
 export async function POST(req: ExtendedNextApiRequest) {
-  const { nft, address } = await req.json();
+  const { nft, address, contract } = await req.json();
 
   const BACKEND_WALLET_ADDRESS = process.env.BACKEND_WALLET_ADDRESS!;
-  const NFT_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS!;
+  const NFT_CONTRACT_ADDRESS = contract
   const CHAIN = process.env.NEXT_PUBLIC_CHAIN!;
 
   try {

@@ -58,7 +58,7 @@ export default async function Page() {
         ))}
       </div>
 
-      <SimpleFooter />
+      {/* <SimpleFooter /> */}
     </div>
   );
 }

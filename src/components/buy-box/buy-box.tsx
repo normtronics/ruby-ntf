@@ -6,11 +6,12 @@ import styles from './buy-box.module.css'
 import Login from '../login/login';
 import { NFT } from '@/types/nft';
 import Button from '../Button';
-import { CardElement, Elements, useElements, useStripe } from "@stripe/react-stripe-js";
-import axios from "axios";
-import { loadStripe } from '@stripe/stripe-js';
-import { checkout } from '../../utils/stripe';
 import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation'
+import initializeFirebaseClient from '@/utils/initFirebase';
+import useFirebaseUser from '@/utils/useFirebaseUser';
+import { arrayUnion, doc, getDoc, setDoc } from 'firebase/firestore';
+import axios from 'axios';
 
 
 interface BuyBoxProps {
@@ -22,8 +23,11 @@ interface BuyBoxProps {
 export const BuyBox = (props: BuyBoxProps) => {
   const address = useAddress()
   const router = useRouter()
-
   const [amount, setAmount] = useState('')
+  const { user: firebaseUser, isLoading: loadingAuth } = useFirebaseUser();
+  const { auth, db } = initializeFirebaseClient();
+  const searchParams = useSearchParams()
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
@@ -41,9 +45,43 @@ export const BuyBox = (props: BuyBoxProps) => {
 
     const { intent } = await res.json()
 
-    // checkout(intent.id)
     router.push(intent.url)
   };
+
+  const checkSessionId = async () => {
+    const session_id = searchParams.get('session_id')
+
+    if(session_id) {
+      setLoading(true);
+        try {
+          await axios.post("/api/nft", {
+            nft: props.nft,
+            address,
+            contract: props.nft.contract.address
+          });
+
+          const usersRef = doc(db, 'users', firebaseUser?.uid!);
+          const userDoc = await getDoc(usersRef);
+          
+          if (userDoc.exists()) { 
+            setDoc(
+              usersRef,
+              { claimedNfts: arrayUnion(props.nft.title)},
+              { merge: true }
+            );
+          }
+    
+        } catch (err) {
+          alert(`Error claiming NFT: ${err}`);
+        } finally {
+          setLoading(false);
+        }
+    }
+  }
+
+  useEffect(() => {
+    checkSessionId()
+  }, [])
   
   return (
     <div className={styles.container}>
