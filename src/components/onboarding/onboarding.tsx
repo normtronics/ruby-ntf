@@ -6,10 +6,13 @@ import { doc,  setDoc } from "firebase/firestore";
 import { useDisconnect, useAddress } from '@thirdweb-dev/react';
 import styles from './onboarding.module.css'
 import initializeFirebaseClient from "@/utils/initFirebase";
+import { useLockBodyScroll } from "@uidotdev/usehooks";
 
 interface OnBoardingProps {}
 
 export const OnBoarding = (props: OnBoardingProps) => {
+  //useLockBodyScroll();
+  
   const [displayName, setDisplayName] = useState('')
   const [email, setEmailAddress] = useState('')
   const { isLoading, document } = useFirebaseDocument()
@@ -29,9 +32,9 @@ export const OnBoarding = (props: OnBoardingProps) => {
 
   const finishAction = useCallback((e: any) => {
     console.log('finishAction', address)
-    if(address) {
+    if(document) {
       e.preventDefault()
-      const usersRef = doc(db, 'users', address);
+      const usersRef = doc(db, 'users', document.id);
       setDoc(
         usersRef,
         { 
