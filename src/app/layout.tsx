@@ -55,7 +55,7 @@ export default function RootLayout({
       <body>
         <Providers>
           {children}
-          <OnBoarding />
+          {/* <OnBoarding /> */}
           <AudioPlayer />
         </Providers>
       </body>
