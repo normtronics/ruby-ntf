@@ -104,6 +104,17 @@ export default async function Page({ params }: { params: { slug: string } }) {
           isMusic
           nft={nft}
         />
+        <iframe 
+          width="100%" 
+          height="315" 
+          src="https://www.youtube.com/embed/MAJjw9r3Xgs?si=I5QP-2lclsUGRMeM" 
+          title="YouTube video player" 
+          frameBorder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          referrerPolicy="strict-origin-when-cross-origin" 
+          allowFullScreen
+        >
+        </iframe>
         {/* <BuyBox 
           type={"fixed"} 
           nft={nft}
