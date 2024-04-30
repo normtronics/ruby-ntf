@@ -109,9 +109,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
           nft={nft}
         /> */}
         <Description description={nft.description}/>
-        <div className={styles.nft}>
+        {/* <div className={styles.nft}>
           <Attributes attributes={nft.atributes}/>
-        </div>
+        </div> */}
       </div> }
       <SimpleFooter />
     </>

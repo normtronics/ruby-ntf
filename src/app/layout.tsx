@@ -42,7 +42,7 @@ export const metadata: Metadata = {
       type: 'png',
     }],
   },
-  creator: 'The Rose Crib',
+  creator: 'Ruby Mountain',
 };
 
 export default function RootLayout({
