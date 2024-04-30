@@ -2,6 +2,7 @@ import Stripe from "stripe";
 import { NextRequest } from "next/server";
 import { headers } from "next/headers";
 import { Engine } from "@thirdweb-dev/engine";
+import { getNft } from "@/queries/getNft";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2024-04-10",
@@ -37,7 +38,7 @@ export async function POST(request: NextRequest) {
       });
 
       const { nft } = await getData(
-        checkoutSessionAsyncPaymentSucceeded.metadata?.slug
+        checkoutSessionAsyncPaymentSucceeded.metadata?.slug || ""
       );
 
       const tx = await engine.erc721.mintTo(
@@ -69,6 +70,9 @@ export async function POST(request: NextRequest) {
     status: 200,
   });
 }
-function getData(slug: any): { nft: any } | PromiseLike<{ nft: any }> {
-  throw new Error("Function not implemented.");
+
+async function getData(slug: string) {
+  const data = await getNft(slug);
+
+  return { nft: data.nft };
 }
