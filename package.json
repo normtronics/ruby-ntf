@@ -23,6 +23,7 @@
     "@thirdweb-dev/react": "^4.6.2",
     "@thirdweb-dev/sdk": "^4.0.63",
     "@uidotdev/usehooks": "^2.4.1",
+    "@vercel/analytics": "^1.2.2",
     "algoliasearch": "^4.23.3",
     "axios": "^1.6.8",
     "ethers": "5",
