@@ -30,7 +30,7 @@ export function Header() {
           RUBY MOUNTAIN
         </Link>
       </div>
-      <div className={`${styles.middle}`}> 
+      {/* <div className={`${styles.middle}`}> 
         <Link href="/music" >
           Music
         </Link>
@@ -40,7 +40,7 @@ export function Header() {
         <Link href="/video" >
           Video
         </Link>
-      </div>
+      </div> */}
       <div className={styles.login}>
         <Login />
       </div>
@@ -61,7 +61,7 @@ export const MobileMenu = ({ close, isOpen }: { close: () => void, isOpen: boole
       <div className={styles.spacer}></div>
       <div className={styles.spacer}></div>
 
-      <ul className={styles.mobileList}>
+      {/* <ul className={styles.mobileList}>
         <li>
           <Link href="">
             Music
@@ -77,27 +77,32 @@ export const MobileMenu = ({ close, isOpen }: { close: () => void, isOpen: boole
             Video
           </Link>
         </li>
-      </ul>
+      </ul> */}
 
       <ul className={styles.mobileList}>
         <li>
-          <Link href="">
+          <Link href="https://www.rubymountain.xyz/">
             EPK
           </Link>
         </li>
         <li>
-          <Link href="">
+          <Link href="https://twitter.com/IAmRubyMountain">
             Twitter
           </Link>
         </li>
         <li>
-          <Link href="">
+          <Link href="https://www.instagram.com/ruby.mountain/">
             Instagram
           </Link>
         </li>
         <li>
-          <Link href="">
+          <Link href="https://www.youtube.com/@rubymountain">
             Youtube
+          </Link>
+        </li>
+        <li>
+          <Link href="https://www.tiktok.com/@rubymountain">
+            Tiktok
           </Link>
         </li>
       </ul>

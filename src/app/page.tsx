@@ -51,7 +51,7 @@ export default async function Page() {
       {address && isLoading && <h1>Loading...</h1>}
       {address && !isLoading && !nfts?.length && <h1>You have no NFTs :(</h1>} */}
 
-      <FilterMenu />
+      {/* <FilterMenu /> */}
       <div className={styles.grid}>
         {nfts && nfts.map((nft) => (
           <Card nft={nft} key={nft.id}/>
