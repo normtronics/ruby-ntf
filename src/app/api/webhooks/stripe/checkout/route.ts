@@ -15,6 +15,8 @@ export async function POST(request: NextRequest) {
   const BACKEND_WALLET_ADDRESS = process.env.BACKEND_WALLET_ADDRESS!;
   const CHAIN = process.env.NEXT_PUBLIC_CHAIN!;
 
+  let tx: any;
+
   const sig = headers().get("stripe-signature") as string;
   let event: Stripe.Event;
   try {
@@ -32,6 +34,10 @@ export async function POST(request: NextRequest) {
     case "checkout.session.async_payment_succeeded":
       const checkoutSessionAsyncPaymentSucceeded = event.data.object;
 
+      break;
+    case "checkout.session.completed":
+      const checkoutSessionCompleted: any = event.data.object;
+
       const engine = new Engine({
         url: process.env.ENGINE_URL!,
         accessToken: process.env.THIRDWEB_ACCESS_TOKEN!,
@@ -39,12 +45,12 @@ export async function POST(request: NextRequest) {
 
       try {
         const { nft } = await getData(
-          checkoutSessionAsyncPaymentSucceeded.metadata?.slug || ""
+          checkoutSessionCompleted.metadata?.slug || ""
         );
 
-        const tx = await engine.erc721.mintTo(
+        tx = await engine.erc721.mintTo(
           CHAIN,
-          checkoutSessionAsyncPaymentSucceeded.metadata?.contractAddress || "",
+          checkoutSessionCompleted.metadata?.contractAddress || "",
           BACKEND_WALLET_ADDRESS,
           {
             metadata: {
@@ -54,8 +60,7 @@ export async function POST(request: NextRequest) {
               //@ts-ignore
               properties: nft.atributes,
             },
-            receiver:
-              checkoutSessionAsyncPaymentSucceeded.metadata?.address || "",
+            receiver: checkoutSessionCompleted.metadata?.address || "",
           }
         );
       } catch (e) {
@@ -63,10 +68,6 @@ export async function POST(request: NextRequest) {
           status: 400,
         });
       }
-
-      break;
-    case "checkout.session.completed":
-      const checkoutSessionCompleted: any = event.data.object;
 
       break;
     default:
