@@ -37,26 +37,32 @@ export async function POST(request: NextRequest) {
         accessToken: process.env.THIRDWEB_ACCESS_TOKEN!,
       });
 
-      const { nft } = await getData(
-        checkoutSessionAsyncPaymentSucceeded.metadata?.slug || ""
-      );
+      try {
+        const { nft } = await getData(
+          checkoutSessionAsyncPaymentSucceeded.metadata?.slug || ""
+        );
 
-      const tx = await engine.erc721.mintTo(
-        CHAIN,
-        checkoutSessionAsyncPaymentSucceeded.metadata?.contractAddress || "",
-        BACKEND_WALLET_ADDRESS,
-        {
-          metadata: {
-            name: nft.title,
-            description: nft.description,
-            image: nft.image,
-            //@ts-ignore
-            properties: nft.atributes,
-          },
-          receiver:
-            checkoutSessionAsyncPaymentSucceeded.metadata?.address || "",
-        }
-      );
+        const tx = await engine.erc721.mintTo(
+          CHAIN,
+          checkoutSessionAsyncPaymentSucceeded.metadata?.contractAddress || "",
+          BACKEND_WALLET_ADDRESS,
+          {
+            metadata: {
+              name: nft.title,
+              description: nft.description,
+              image: nft.image,
+              //@ts-ignore
+              properties: nft.atributes,
+            },
+            receiver:
+              checkoutSessionAsyncPaymentSucceeded.metadata?.address || "",
+          }
+        );
+      } catch (e) {
+        return new Response(`Webhook Error: ${e}`, {
+          status: 400,
+        });
+      }
 
       break;
     case "checkout.session.completed":
