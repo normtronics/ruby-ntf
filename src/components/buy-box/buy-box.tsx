@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ConnectWallet, useAddress, useContract, useNFTBalance, useOwnedNFTs } from "@thirdweb-dev/react";
 import styles from './buy-box.module.css'
 import Login from '../login/login';
@@ -48,9 +48,8 @@ export const BuyBox = (props: BuyBoxProps) => {
   const [openModal, setModalOpen] = useState(false);
   const handleOpen = () => setModalOpen(!open);
 
-  console.log('buybox address', address)
-
-  const onSubmit = async (e: any) => {
+  // Will create a stripe session and the redirect them to checkout
+  const onSubmit = useCallback(async (e: any) => {
     setLoading(true)
     e.preventDefault();
 
@@ -73,61 +72,35 @@ export const BuyBox = (props: BuyBoxProps) => {
 
     const stripe = await getStripe()
 
-    setLoading(false)
-
     await stripe?.redirectToCheckout({ sessionId: intent.id });
-  };
 
+    setLoading(false)
+  }, [])
+
+  //If there is a session id the payment when through 
   const checkSessionId = async () => {
     const session_id = searchParams.get('session_id')
 
-    if(session_id && address) {
+    if(session_id) {
       setLoading(true);
-        try {
-          await axios.post("/api/nft", {
-            nft: props.nft,
-            address: address,
-            contract: props.nft.contract.address
-          });
-          
-          handleOpen()
-
-          const usersRef = doc(db, 'users', address);
-          const userDoc = await getDoc(usersRef);
-          
-          if (userDoc.exists()) { 
-            setDoc(
-              usersRef,
-              { claimedNfts: arrayUnion(props.nft.title)},
-              { merge: true }
-            );
-          }
-    
-        } catch (err) {
-          alert(`Error claiming NFT: ${err}`);
-          setLoading(false);
-        } finally {
-          setLoading(false);
-          const current = new URLSearchParams(Array.from(searchParams.entries())); 
-          current.delete("session_id");
-          // cast to string
-          const search = current.toString();
-          // or const query = `${'?'.repeat(search.length && 1)}${search}`;
-          const query = search ? `?${search}` : "";
-
-          router.push(`${pathname}${query}`);
-        }
+      handleOpen()
+      setLoading(false);
+      // const current = new URLSearchParams(Array.from(searchParams.entries())); 
+      // current.delete("session_id");
+      // const search = current.toString();
+      // const query = search ? `?${search}` : "";
+      // router.push(`${pathname}${query}`);
     }
   }
 
-  // const checkIfOwner = () => {
-  //   if(nfts) {
-  //     const found = nfts.find(n => n.metadata.name === props.nft.title)
-  //     return found !== null
-  //   }
+  const checkIfOwner = () => {
+    if(nfts) {
+      const found = nfts.find(n => n.metadata.name === props.nft.title)
+      return found !== null
+    }
 
-  //   return false
-  // }
+    return false
+  }
 
   // useEffect(() => {
   //   if(address) {
@@ -150,6 +123,10 @@ export const BuyBox = (props: BuyBoxProps) => {
   //   )
   // }
 
+  const updatePrice = useCallback((e: any) => {
+     setAmount(e.target.value)
+  }, [])
+
   return (
     <div className={styles.container}>
       <h2>Listing Info</h2>
@@ -159,9 +136,7 @@ export const BuyBox = (props: BuyBoxProps) => {
             <input 
               type='number' 
               placeholder='Enter your price' 
-              value={amount} onChange={(e) => {
-                setAmount(e.target.value)
-              }}
+              value={amount} onChange={updatePrice}
               disabled={loading}
             />
           </div>
