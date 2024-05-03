@@ -146,6 +146,7 @@ export const BuyBox = (props: BuyBoxProps) => {
               value={amount} 
               onChange={(e) => {
                 setAmount(e.target.value)
+                console.log(e.target.value)
               }}
               disabled={loading}
             />
