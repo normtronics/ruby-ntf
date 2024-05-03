@@ -9,7 +9,6 @@ interface CurrentlyPlayingProps {
 
 export const CurrentlyPlaying = (props: CurrentlyPlayingProps) => {
   const { image, songTitle, artist } = props
-  console.log(props)
   return (
     <div className={styles.currentlyPlaying}>
       {(image && songTitle && artist) ? (

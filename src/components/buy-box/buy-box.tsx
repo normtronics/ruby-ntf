@@ -139,7 +139,9 @@ export const BuyBox = (props: BuyBoxProps) => {
             <input 
               type='number' 
               placeholder='Enter your price' 
-              value={amount} onChange={updatePrice}
+              value={amount} onChange={(e) => {
+                setAmount(e.target.value)
+              }}
               disabled={loading}
             />
           </div>
