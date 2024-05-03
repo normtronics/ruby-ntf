@@ -49,7 +49,7 @@ export const BuyBox = (props: BuyBoxProps) => {
   const handleOpen = () => setModalOpen(!open);
 
   // Will create a stripe session and the redirect them to checkout
-  const onSubmit = useCallback(async (e: any) => {
+  const onSubmit = async (e: any) => {
     setLoading(true)
     e.preventDefault();
 
@@ -77,7 +77,7 @@ export const BuyBox = (props: BuyBoxProps) => {
     await stripe?.redirectToCheckout({ sessionId: intent.id });
 
     setLoading(false)
-  }, [])
+  }
 
   //If there is a session id the payment when through 
   const checkSessionId = async () => {
@@ -146,7 +146,7 @@ export const BuyBox = (props: BuyBoxProps) => {
               value={amount} 
               onChange={(e) => {
                 setAmount(e.target.value)
-                console.log(e.target.value)
+                console.log(Number(e.target.value))
               }}
               disabled={loading}
             />
