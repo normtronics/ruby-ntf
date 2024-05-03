@@ -1,13 +1,20 @@
 const NFTs = [
   {
-    name: "Ruby Mountain Self Portrait No. 1",
-    description: "Ruby Mountain Self Portrait No. 1",
+    name: "Ruby Mountain Self Portrait No. 2",
+    description: '\"Rebirth\" is a self-portrait series by Ruby Mountain, capturing their evolution into a new version of herself and their deep connection with her highest self. In this rebirth era, Ruby Mountain explores self-reflection, healing, and nature to unlock their true creative potential, breaking free from societal expectations and personal struggles. /n/nJoin Ruby Mountain on this artistic journey as she unveils her latest single, "Eclipse," a testament to their journey through grief and emerging stronger on the other side. The owners of NFT Rebirth #2 will receive an exclusive invitation to Ruby Mountain\'s private "Eclipse" listening party on April 28th, 2024, in Los Angeles.',
     image:
-      "ipfs://bafybeiclabgip3wyaoxo3i45ogefb3ym4tndrrpem4hb6dxf7j33w64cxu/IMG_3517-1%20(dragged).jpg",
+      "ipfs://QmUstFUQif4MXmKo2F9wRqaji7ru54pCmmAMYNkZBM7V5j/Asset%202.png",
     attributes: {
-      edition: "first",
-      color: "red",
-      artist: "ruby mountain"
+      color: "Purple",
+      artist: "Ruby Mountain",
+      edition: "First",
+      release: "1st Church of Mycology",
+      date: "April 19th, 2024",
+      media: "Digital Photography",
+      flowers: "Roses",
+      clothing: "Red",
+      home_plant: "Venus",
+      ethnicity: "Afghan"
     },
   },
 ];

@@ -19,6 +19,8 @@ import {
   DialogBody,
   DialogFooter,
 } from "@material-tailwind/react";
+import getStripe from '@/utils/stripe';
+import { ThreeCircles } from 'react-loader-spinner'
 
 
 interface BuyBoxProps {
@@ -26,27 +28,30 @@ interface BuyBoxProps {
   nft: NFT
 }
 
+type SafeNft = Omit<NFT, 'description'>;
+
+
+
 
 export const BuyBox = (props: BuyBoxProps) => {
   const address = useAddress()
   const router = useRouter()
   const [amount, setAmount] = useState('')
-  const { user: firebaseUser, isLoading: loadingAuth } = useFirebaseUser();
-  const { auth, db } = initializeFirebaseClient();
+  const { db } = initializeFirebaseClient();
   const searchParams = useSearchParams()
   const [loading, setLoading] = useState(false);
   const pathname = usePathname();
 
   const { data: contract } = useContract(props.nft.contract.address);
-  const { data: nfts, isLoading } = useOwnedNFTs(contract, address);
-  const { data: nftBalance } = useNFTBalance(contract, address);
+  const { data: nfts, isLoading: nftsLoading } = useOwnedNFTs(contract, address);
 
   const [openModal, setModalOpen] = useState(false);
   const handleOpen = () => setModalOpen(!open);
 
-  console.log(nfts)
+  console.log('buybox address', address)
 
   const onSubmit = async (e: any) => {
+    setLoading(true)
     e.preventDefault();
 
     const res = await fetch("/api/stripe/create-payment-intent", {
@@ -56,13 +61,23 @@ export const BuyBox = (props: BuyBoxProps) => {
         amount: Number(amount),
         title: props.nft.title,
         image: props.nft.image,
-        redirectUrl: window.location.href
+        redirectUrl: window.location.href,
+        contractAddress: props.nft.contract.address,
+        address: address,
+        nftMetaData: props.nft.atributes,
+        slug: props.nft.slug
       }),
     })
 
     const { intent } = await res.json()
 
-    router.push(intent.url)
+    //router.push(intent.url)
+
+    const stripe = await getStripe()
+
+    setLoading(false)
+
+    // await stripe?.redirectToCheckout({ sessionId: intent.id });
   };
 
   const checkSessionId = async () => {
@@ -107,20 +122,35 @@ export const BuyBox = (props: BuyBoxProps) => {
     }
   }
 
-  const checkIfOwner = () => {
-    if(nfts) {
-      const found = nfts.find(n => n.metadata.name === props.nft.title)
-      return found !== null
-    }
+  // const checkIfOwner = () => {
+  //   if(nfts) {
+  //     const found = nfts.find(n => n.metadata.name === props.nft.title)
+  //     return found !== null
+  //   }
 
-    return false
-  }
+  //   return false
+  // }
 
-  useEffect(() => {
-    if(address) {
-      checkSessionId()
-    }
-  }, [address])
+  // useEffect(() => {
+  //   if(address) {
+  //     // checkSessionId()
+  //   }
+  // }, [address])
+
+
+  // if(loading || nftsLoading) {
+  //   return (
+  //     <ThreeCircles
+  //       visible={true}
+  //       height="100"
+  //       width="100"
+  //       color="#4fa94d"
+  //       ariaLabel="three-circles-loading"
+  //       wrapperStyle={{}}
+  //       wrapperClass=""
+  //       />
+  //   )
+  // }
 
   return (
     <div className={styles.container}>
@@ -128,19 +158,22 @@ export const BuyBox = (props: BuyBoxProps) => {
       {address ? ( 
         <div className={styles.innerContainer}>
           <div className={styles.price}>
-            <div className={styles.payTitle}>
-              {checkIfOwner() ? (
-                <div>Already in your collection</div>
-              ): (
-                <div>Pay what you want</div>
-              )}
-            </div>
-            <input type='number' placeholder='Enter your price' value={amount} onChange={(e) => {
-              setAmount(e.target.value)
-            }}/>
+            <input 
+              type='number' 
+              placeholder='Enter your price' 
+              value={amount} onChange={(e) => {
+                setAmount(e.target.value)
+              }}
+              disabled={loading}
+            />
           </div>
-          <div className={styles.button}>
-              <button onClick={onSubmit}>Purchase</button>
+          <div className={!loading ? styles.button : styles.disabled}>
+              <button 
+                onClick={onSubmit}
+                disabled={loading}
+              >
+                {!loading ? 'Purchase' : 'Loading...'}
+              </button>
           </div>
         </div> 
       ) : (
@@ -164,3 +197,11 @@ export const BuyBox = (props: BuyBoxProps) => {
   )
 }
 //disabled={checkIfOwner()} 
+
+//  <div className={styles.payTitle}>
+//               {checkIfOwner() ? (
+//                 <div>Already in your collection</div>
+//               ): (
+//                 <div>Pay what you want</div>
+//               )}
+//             </div>

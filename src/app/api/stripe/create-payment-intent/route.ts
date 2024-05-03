@@ -7,31 +7,42 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 });
 
 export async function POST(req: NextRequest) {
-  const { amount, title, image, redirectUrl } = await req.json()
+  const {
+    amount,
+    title,
+    image,
+    redirectUrl,
+    contractAddress,
+    address,
+    nftMetaData,
+    slug,
+  } = await req.json();
   try {
-    // const paymentIntent = await stripe.paymentIntents.create({
-    //   amount: Number(amount) * 100,
-    //   currency: "USD",
-    // });
-
     const session = await stripe.checkout.sessions.create({
-      line_items: [{
-        price_data: {
-          currency: 'usd',
-          product_data: {
-            name: title,
-            images: [image]
+      line_items: [
+        {
+          price_data: {
+            currency: "usd",
+            product_data: {
+              name: title,
+              images: [image],
+            },
+            unit_amount: amount * 100,
           },
-          unit_amount: amount * 100
+          quantity: 1,
         },
-        quantity: 1
-      }],
-      mode: 'payment',
+      ],
+      metadata: {
+        address,
+        contractAddress,
+        slug: slug,
+      },
+      mode: "payment",
       success_url: `${redirectUrl}?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: redirectUrl,
     });
 
-    return NextResponse.json({intent: session}, { status: 200 });
+    return NextResponse.json({ intent: session }, { status: 200 });
   } catch (error: any) {
     return new NextResponse(error, {
       status: 400,

@@ -2,20 +2,20 @@ import { PrivateKeyWallet } from "@thirdweb-dev/auth/evm";
 import { ThirdwebAuthAppRouter } from "@thirdweb-dev/auth/next";
 
 export const { ThirdwebAuthHandler, getUser } = ThirdwebAuthAppRouter({
-  domain: process.env.NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN || '',
-  wallet: new PrivateKeyWallet(process.env.THIRDWEB_AUTH_PRIVATE_KEY || ''),
+  domain: process.env.NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN || "",
+  wallet: new PrivateKeyWallet(process.env.THIRDWEB_AUTH_PRIVATE_KEY || ""),
   callbacks: {
     onLogin: async (address) => {
-      // console.log('address', address);
+      console.log("on login address", address);
     },
     onUser: async (user) => {
       try {
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN}/api/auth/firebase`,
           {
-            method: 'POST',
+            method: "POST",
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
             },
             body: JSON.stringify({ address: user.address }),
           }
@@ -29,13 +29,13 @@ export const { ThirdwebAuthHandler, getUser } = ThirdwebAuthAppRouter({
           firebaseToken: token,
         };
       } catch (error) {
-        console.log('error', error);
+        console.log("error", error);
 
         return {};
       }
     },
     onLogout: async (user) => {
-      // Finally, we can run any side-effects whenever a user logs out.
+      console.log("onlogout");
     },
   },
 });

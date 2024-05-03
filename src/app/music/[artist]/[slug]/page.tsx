@@ -78,7 +78,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   const { slug } = params
   const { nft } = await getData(slug)
-  console.log('nft', nft)
+  // console.log('nft', nft)
 
   const endDate = new Date(nft.end).toLocaleString("en-US", {
     timeZone: "America/Los_Angeles"
@@ -115,14 +115,14 @@ export default async function Page({ params }: { params: { slug: string } }) {
           allowFullScreen
         >
         </iframe>
-        {/* <BuyBox 
+        <BuyBox 
           type={"fixed"} 
           nft={nft}
-        /> */}
+        />
         <Description description={nft.description}/>
-        {/* <div className={styles.nft}>
+        <div className={styles.nft}>
           <Attributes attributes={nft.atributes}/>
-        </div> */}
+        </div>
       </div> }
       <SimpleFooter />
     </>

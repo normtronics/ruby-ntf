@@ -1,9 +1,9 @@
-import { useUser } from '@thirdweb-dev/react';
-import { signInWithCustomToken } from 'firebase/auth';
-import { doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
-import { useEffect } from 'react';
-import initializeFirebaseClient from './initFirebase';
-import useFirebaseUser from './useFirebaseUser';
+import { useUser } from "@thirdweb-dev/react";
+import { signInWithCustomToken } from "firebase/auth";
+import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
+import { useEffect } from "react";
+import initializeFirebaseClient from "./initFirebase";
+import useFirebaseUser from "./useFirebaseUser";
 
 export const useRadioUser = () => {
   const thirdWebUser = useUser();
@@ -20,7 +20,7 @@ export const useRadioUser = () => {
       const user = userCredential.user;
 
       // If this is a new user, we create a new document in the database.
-      const usersRef = doc(db, 'users', user.uid!);
+      const usersRef = doc(db, "users", user.uid!);
       const userDoc = await getDoc(usersRef);
 
       if (!userDoc.exists()) {
@@ -38,9 +38,9 @@ export const useRadioUser = () => {
     }
   };
 
-  useEffect(() => {
-    getUser();
-  }, [thirdWebUser.user?.data]);
+  // useEffect(() => {
+  //   getUser();
+  // }, [thirdWebUser.user?.data]);
 
   return {
     thirdWebUser,

@@ -1,11 +1,13 @@
-import initializeFirebaseServer from '@/utils/initFirebaseAdmin';
-import { NextResponse } from 'next/server'
+import initializeFirebaseServer from "@/utils/initFirebaseAdmin";
+import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   const { address } = await request.json();
 
+  console.log("Hit api firebase route");
+
   if (!address) {
-    return NextResponse.json({ error: 'No address' }, { status: 401 });
+    return NextResponse.json({ error: "No address" }, { status: 401 });
   }
   // Initialize the Firebase Admin SDK.
   const { auth } = initializeFirebaseServer();

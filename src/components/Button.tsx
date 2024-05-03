@@ -15,7 +15,6 @@ import {
 } from "@material-tailwind/react";
 import Login from "./login/login";
 import { NFT } from "@/types/nft";
-import { useRadioUser } from "@/utils/useUser";
 import { arrayUnion, doc, getDoc, setDoc } from "firebase/firestore";
 import useFirebaseUser from "@/utils/useFirebaseUser";
 import initializeFirebaseClient from "@/utils/initFirebase";
