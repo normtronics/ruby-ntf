@@ -71,13 +71,11 @@ export const BuyBox = (props: BuyBoxProps) => {
 
     const { intent } = await res.json()
 
-    //router.push(intent.url)
-
     const stripe = await getStripe()
 
     setLoading(false)
 
-    // await stripe?.redirectToCheckout({ sessionId: intent.id });
+    await stripe?.redirectToCheckout({ sessionId: intent.id });
   };
 
   const checkSessionId = async () => {
