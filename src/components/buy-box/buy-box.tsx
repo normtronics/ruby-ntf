@@ -125,6 +125,10 @@ export const BuyBox = (props: BuyBoxProps) => {
   //   )
   // }
 
+  useEffect(() => {
+    console.log(amount)
+  }, [amount])
+
   const updatePrice = useCallback((e: any) => {
     console.log(e)
     setAmount(e.target.value)
@@ -139,7 +143,8 @@ export const BuyBox = (props: BuyBoxProps) => {
             <input 
               type='number' 
               placeholder='Enter your price' 
-              value={amount} onChange={(e) => {
+              value={amount} 
+              onChange={(e) => {
                 setAmount(e.target.value)
               }}
               disabled={loading}
