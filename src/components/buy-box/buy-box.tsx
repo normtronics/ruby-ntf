@@ -53,6 +53,8 @@ export const BuyBox = (props: BuyBoxProps) => {
     setLoading(true)
     e.preventDefault();
 
+    console.log(Number(amount))
+
     const res = await fetch("/api/stripe/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -124,7 +126,8 @@ export const BuyBox = (props: BuyBoxProps) => {
   // }
 
   const updatePrice = useCallback((e: any) => {
-     setAmount(e.target.value)
+    console.log(e)
+    setAmount(e.target.value)
   }, [])
 
   return (
