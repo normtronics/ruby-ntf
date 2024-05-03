@@ -45,7 +45,7 @@ export const BuyBox = (props: BuyBoxProps) => {
   const { data: contract } = useContract(props.nft.contract.address);
   const { data: nfts, isLoading: nftsLoading } = useOwnedNFTs(contract, address);
 
-  const [openModal, setModalOpen] = useState(false);
+  const [openModal, setModalOpen] = useState(true);
   const handleOpen = () => setModalOpen(!open);
 
   // Will create a stripe session and the redirect them to checkout
@@ -125,16 +125,8 @@ export const BuyBox = (props: BuyBoxProps) => {
   //   )
   // }
 
-  useEffect(() => {
-    console.log(amount)
-  }, [amount])
-
-  const updatePrice = useCallback((e: any) => {
-    console.log(e)
-    setAmount(e.target.value)
-  }, [])
-
   return (
+    <>
     <div className={styles.container}>
       <h2>Listing Info</h2>
       {address ? ( 
@@ -146,7 +138,6 @@ export const BuyBox = (props: BuyBoxProps) => {
               value={amount} 
               onChange={(e) => {
                 setAmount(e.target.value)
-                console.log(Number(e.target.value))
               }}
               disabled={loading}
             />
@@ -166,18 +157,19 @@ export const BuyBox = (props: BuyBoxProps) => {
           <p className="disclaimer">Press <i>&quot;Connect Wallet&quot;</i> to sign-up with email or crypto wallet and claim your digital collectable</p>
         </div>
       )}
-      <Dialog open={openModal} handler={handleOpen} placeholder={''}>
-        <DialogHeader placeholder={''}>Thank you! </DialogHeader>
-        <DialogBody placeholder={''}>
-          Thank you for purchaseing my NFT!
-        </DialogBody>
-        <DialogFooter placeholder={''}>
-          <MButton variant="gradient" color="green" onClick={() => { handleOpen(); }} placeholder={''}>
-            <span>Close</span>
-          </MButton>
-        </DialogFooter>
-      </Dialog>
     </div>
+    <Dialog open={openModal} handler={handleOpen} placeholder={''}>
+      <DialogHeader placeholder={''}>Thank you! </DialogHeader>
+      <DialogBody placeholder={''}>
+        Thank you for purchasing my NFT! It will be available in your <a href=''>library</a>.
+      </DialogBody>
+      <DialogFooter placeholder={''}>
+        <MButton variant="gradient" color="green" onClick={() => { handleOpen(); }} placeholder={''}>
+          <span>Close</span>
+        </MButton>
+      </DialogFooter>
+    </Dialog>
+    </>
   )
 }
 //disabled={checkIfOwner()} 
