@@ -3,6 +3,8 @@ import { NextRequest } from "next/server";
 import { headers } from "next/headers";
 import { Engine } from "@thirdweb-dev/engine";
 import { getNft } from "@/queries/getNft";
+import initializeFirebaseServer from "@/utils/initFirebaseAdmin";
+import { arrayUnion } from "firebase/firestore";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2024-04-10",
@@ -48,9 +50,13 @@ export async function POST(request: NextRequest) {
           checkoutSessionCompleted.metadata?.slug || ""
         );
 
+        const contractAddress =
+          checkoutSessionCompleted.metadata?.contractAddress || "";
+        const address = checkoutSessionCompleted.metadata?.address || "";
+
         tx = await engine.erc721.mintTo(
           CHAIN,
-          checkoutSessionCompleted.metadata?.contractAddress || "",
+          contractAddress,
           BACKEND_WALLET_ADDRESS,
           {
             metadata: {
@@ -60,8 +66,20 @@ export async function POST(request: NextRequest) {
               //@ts-ignore
               properties: nft.atributes,
             },
-            receiver: checkoutSessionCompleted.metadata?.address || "",
+            receiver: address,
           }
+        );
+
+        const { db } = initializeFirebaseServer();
+
+        const nftData = {
+          ...tx,
+          ...nft,
+        };
+
+        db.doc(`users/${address}`).set(
+          { library: arrayUnion(nftData) },
+          { merge: true }
         );
       } catch (e) {
         return new Response(`Webhook Error: ${e}`, {
