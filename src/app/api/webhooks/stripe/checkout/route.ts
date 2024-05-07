@@ -6,11 +6,46 @@ import { getNft } from "@/queries/getNft";
 import initializeFirebaseServer from "@/utils/initFirebaseAdmin";
 import { arrayUnion } from "firebase/firestore";
 import { title } from "process";
+import { FieldValue } from "firebase-admin/firestore";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2024-04-10",
   typescript: true,
 });
+
+export async function GET(request: NextRequest) {
+  try {
+    const nftData = {
+      //...tx,
+      id: "121256575",
+      slug: "12121",
+    };
+    const { db } = initializeFirebaseServer();
+
+    const userRef = db
+      .collection("users")
+      .doc("0x155dC109b493694E188E7Cf8cBb7A2F3D04B78cb");
+
+    console.log(userRef);
+
+    userRef.set({ library: FieldValue.arrayUnion(nftData) }, { merge: true });
+
+    // db.doc(`users/0x155dC109b493694E188E7Cf8cBb7A2F3D04B78cb`).set(
+    //   { library: arrayUnion({}) },
+    //   { merge: true }
+    // );
+
+    return new Response("RESPONSE EXECUTE", {
+      status: 200,
+    });
+  } catch (e) {
+    console.log(e);
+
+    return new Response("RESPONSE EXECUTE", {
+      status: 200,
+    });
+  }
+}
 
 export async function POST(request: NextRequest) {
   const body = await request.text();
@@ -74,7 +109,7 @@ export async function POST(request: NextRequest) {
         const { db } = initializeFirebaseServer();
 
         const nftData = {
-          //...tx,
+          ...tx,
           id: nft.id,
           slug: nft.slug,
           type: nft.slug,
@@ -83,10 +118,10 @@ export async function POST(request: NextRequest) {
           creator: nft.creator,
         };
 
-        console.log(tx);
+        const userRef = db.collection("users").doc(address);
 
-        db.doc(`users/${address}`).set(
-          { library: arrayUnion(nftData) },
+        userRef.set(
+          { library: FieldValue.arrayUnion(nftData) },
           { merge: true }
         );
       } catch (e) {
