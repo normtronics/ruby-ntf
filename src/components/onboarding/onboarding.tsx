@@ -4,21 +4,21 @@ import useFirebaseDocument from "@/utils/useFirebaseUserDocument"
 import { useState, useCallback, useEffect } from 'react';
 import { doc,  setDoc } from "firebase/firestore";
 import { useDisconnect, useAddress } from '@thirdweb-dev/react';
-import styles from './onboarding.module.css'
 import initializeFirebaseClient from "@/utils/initFirebase";
-import { useLockBodyScroll } from "@uidotdev/usehooks";
+
+import { View, Text, TextInput, Pressable } from 'react-native' 
+import { styles as RNStyles } from './onboarding.styles'
 
 interface OnBoardingProps {}
 
 export const OnBoarding = (props: OnBoardingProps) => {
-  //useLockBodyScroll();
-  
+
   const [displayName, setDisplayName] = useState('')
   const [email, setEmailAddress] = useState('')
   const { isLoading, document } = useFirebaseDocument()
   const { user: firebaseUser, isLoading: loadingAuth } = useFirebaseUser();
   const { db } = initializeFirebaseClient();
-  const [isOpen, setOpen] = useState(false)
+  const [isOpen, setOpen] = useState(true)
   const disconnect = useDisconnect()
   const address = useAddress()
 
@@ -59,69 +59,49 @@ export const OnBoarding = (props: OnBoardingProps) => {
     setOpen(false)
   }, [])
 
-  useEffect(() => {
-    console.log(document)
-    if(document && !document.onBoarded) {
-      setOpen(true)
-    }
-  }, [document])
+  // useEffect(() => {
+  //   console.log(document)
+  //   if(document && !document.onBoarded) {
+  //     setOpen(true)
+  //   }
+  // }, [document])
 
-  if(loadingAuth || isLoading || !firebaseUser || !document) {
-    return null
-  }
+  // if(loadingAuth || isLoading || !firebaseUser || !document) {
+  //   return null
+  // }
 
   return (
-    <>
-      { (isOpen) ? ( <div className={styles.overlay}>
-        <button 
-            className={styles.close} 
-            onClick={closeAction}>
-          <img 
-            src="/icons/close.svg" 
-            className={styles.icon}
-          />
-        </button>
-        <div className={styles.container}>
-          <h1 className={styles.title}>Welcome</h1>
-          <div className={styles.text}>Choose a display name and enter your email address to receive updates from Ruby Mountain</div>
-          <input 
-            type="text" 
-            placeholder="Display name" 
-            className={styles.input}
-            onChange={displayChange}
-            value={displayName}
-          />
-          <input 
-            type="email"   
-            placeholder="Enter your email"  
-            className={styles.input}
-            onChange={emailChange}
-            value={email}
-          />
+    <View style={RNStyles.overlay}>
+      <View style={RNStyles.container}>
+        <Text style={RNStyles.title}>Welcome</Text>
+        <Text style={RNStyles.text}>Choose a display name and enter your email address to receive updates from Ruby Mountain</Text>
+        <TextInput 
+          placeholder="Display name"
+          style={RNStyles.input}
+          onChange={displayChange}
+          value={displayName}
+        />
 
-          {/* <div className={styles.inputContainer}>
-            <input type="checkbox" />
-            <div>I have read and accepted the Terms of Service, the Terms of Creator and confirm that I am at least 13 years old.</div>
-          </div> */}
+        <TextInput 
+          placeholder="Enter your email"
+          style={RNStyles.input}
+          onChange={emailChange}
+          value={email}
+        />
 
-          {/* <div className={styles.inputContainer}>
-            <input type="checkbox" />
-            <div>I want to receive annoucements and news from Ruby Mountain to stay up to date.</div>
-          </div> */}
+        <Pressable 
+          style={RNStyles.button}
+          onPress={finishAction}
+        >
+          <Text>Finish sign-up</Text>
+        </Pressable>
 
-          <button 
-            className={styles.button}
-            onClick={finishAction}
-          >
-            Finish sign-up
-          </button>
-          <button 
-            onClick={disconnectAction}
-          >
-            Disconnect
-          </button>
-        </div>
-      </div> ) : null }
-    </>
+        <Pressable 
+          onPress={disconnectAction}
+        >
+          <Text>Disconnect</Text>
+        </Pressable>
+      </View>
+    </View>
   )
 }

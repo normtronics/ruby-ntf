@@ -45,7 +45,7 @@ export const BuyBox = (props: BuyBoxProps) => {
   const { data: contract } = useContract(props.nft.contract.address);
   const { data: nfts, isLoading: nftsLoading } = useOwnedNFTs(contract, address);
 
-  const [openModal, setModalOpen] = useState(true);
+  const [openModal, setModalOpen] = useState(false);
   const handleOpen = () => setModalOpen(!open);
 
   // Will create a stripe session and the redirect them to checkout
@@ -87,11 +87,11 @@ export const BuyBox = (props: BuyBoxProps) => {
       setLoading(true);
       handleOpen()
       setLoading(false);
-      // const current = new URLSearchParams(Array.from(searchParams.entries())); 
-      // current.delete("session_id");
-      // const search = current.toString();
-      // const query = search ? `?${search}` : "";
-      // router.push(`${pathname}${query}`);
+      const current = new URLSearchParams(Array.from(searchParams.entries())); 
+      current.delete("session_id");
+      const search = current.toString();
+      const query = search ? `?${search}` : "";
+      router.push(`${pathname}${query}`);
     }
   }
 
@@ -104,11 +104,9 @@ export const BuyBox = (props: BuyBoxProps) => {
     return false
   }
 
-  // useEffect(() => {
-  //   if(address) {
-  //     // checkSessionId()
-  //   }
-  // }, [address])
+  useEffect(() => {
+    checkSessionId()
+  }, [])
 
 
   // if(loading || nftsLoading) {
@@ -172,12 +170,3 @@ export const BuyBox = (props: BuyBoxProps) => {
     </>
   )
 }
-//disabled={checkIfOwner()} 
-
-//  <div className={styles.payTitle}>
-//               {checkIfOwner() ? (
-//                 <div>Already in your collection</div>
-//               ): (
-//                 <div>Pay what you want</div>
-//               )}
-//             </div>
