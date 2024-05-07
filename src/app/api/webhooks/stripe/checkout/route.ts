@@ -5,6 +5,7 @@ import { Engine } from "@thirdweb-dev/engine";
 import { getNft } from "@/queries/getNft";
 import initializeFirebaseServer from "@/utils/initFirebaseAdmin";
 import { arrayUnion } from "firebase/firestore";
+import { title } from "process";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2024-04-10",
@@ -73,9 +74,16 @@ export async function POST(request: NextRequest) {
         const { db } = initializeFirebaseServer();
 
         const nftData = {
-          ...tx,
-          ...nft,
+          //...tx,
+          id: nft.id,
+          slug: nft.slug,
+          type: nft.slug,
+          image: nft.image,
+          title: nft.image,
+          creator: nft.creator,
         };
+
+        console.log(tx);
 
         db.doc(`users/${address}`).set(
           { library: arrayUnion(nftData) },
