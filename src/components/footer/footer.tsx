@@ -7,10 +7,13 @@ export function SimpleFooter() {
     <footer className="flex w-full flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 py-6 text-center md:justify-between" style={{
       clear: 'both',
       position: 'relative',
-      height: 200,
-      marginTop: -200,
-      paddingTop: 200,
-      paddingBottom: 100
+      // height: 200,
+      // marginTop: -200,
+      // paddingTop: 200,
+      // paddingBottom: 100,
+      maxWidth: 1200,
+      margin: '0 auto',
+      padding: 16
     }}>
       <Typography className="font-normal" placeholder={''}>
         &copy; 2024 Ruby Mountain
