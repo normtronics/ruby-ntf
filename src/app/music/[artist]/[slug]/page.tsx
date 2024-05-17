@@ -97,16 +97,21 @@ export default async function Page({ params }: { params: { slug: string } }) {
     <>
       <Header />
       {nft && <div className={styles.container}>
-        <img src={nft.image} alt={nft.title} className={styles.image}/>
-        <NftInfo 
-          name={nft.creator.name} 
-          title={nft.title} 
-          isMusic
-          nft={nft}
-        />
+        <h1 
+          style={{
+            fontSize: 30,
+            marginBottom: 4
+          }}
+        >
+          &quot;Eclipse&quot; by Ruby Mountain</h1>
+        <h2
+        style={{
+          marginBottom: 16
+        }}
+        >Listening Party Performance</h2>
         <iframe 
           width="100%" 
-          height="315" 
+          height="500" 
           src="https://www.youtube.com/embed/MAJjw9r3Xgs?si=I5QP-2lclsUGRMeM" 
           title="YouTube video player" 
           frameBorder="0" 
@@ -115,11 +120,22 @@ export default async function Page({ params }: { params: { slug: string } }) {
           allowFullScreen
         >
         </iframe>
+        <NftInfo 
+          name={nft.creator.name} 
+          title={nft.title} 
+          isMusic
+          nft={nft}
+        />
         {/* <BuyBox 
           type={"fixed"} 
           nft={nft}
         /> */}
         <Description description={nft.description}/>
+         <img 
+          src={nft.image} 
+          alt={nft.title} 
+          className={styles.image}
+        />
         {/* <div className={styles.nft}>
           <Attributes attributes={nft.atributes}/>
         </div> */}
