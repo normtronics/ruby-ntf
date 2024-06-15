@@ -32,12 +32,15 @@ const Button: FC<{ nft: NFT }> = ({ nft }) => {
   // const usersRef = firebaseUser ? doc(db, 'users', firebaseUser.uid!) : null
   // const [isClaimed, setIsClaimed] = useState()
 
+  
+
   const claim = async () => {
     setLoading(true);
     try {
       await axios.post("/api/nft", {
         nft,
         address,
+        contract: nft.contract.address
       });
 
       handleOpen()
