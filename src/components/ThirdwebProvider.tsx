@@ -17,9 +17,9 @@ export const CustomThirdwebProvider: FC<{ children: React.ReactNode }> = ({ chil
       clientId={process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID}
       locale={en()}
       supportedWallets={[
-        metamaskWallet({ recommended: true }),
-        coinbaseWallet(),
-        walletConnect(),
+        // metamaskWallet({ recommended: true }),
+        // coinbaseWallet(),
+        // walletConnect(),
         embeddedWallet({
           auth: {
             options: [
