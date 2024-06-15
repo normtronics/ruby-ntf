@@ -14,6 +14,7 @@
   height: 100%;
   object-fit: contain;
   object-position: center;
+  background-color: #ffc0f8;
 }
 
 .square.fullImg {
@@ -21,7 +22,7 @@
 }
 
 .square.fullImg img {
-  object-fit: cover;
+  /* object-fit: cover; */
 }
 
 .nftInfo {
