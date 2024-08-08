@@ -5,7 +5,7 @@ import styles from "../../../../styles/Claim.module.css";
 import { Header } from "@/components/Header/Header";
 import { Metadata, ResolvingMetadata } from "next";
 import React from "react";
-import { SimpleFooter } from "@/components/footer/footer";
+import { Footer } from "@/components/footer/footer";
 import { getNft } from "@/queries/getNft";
 
 
@@ -61,6 +61,8 @@ export async function generateMetadata(
 async function getData(slug: string) {
   const data = await getNft(slug)
 
+  console.log(data)
+
   return { nft: data.nft};
 }
 
@@ -73,6 +75,8 @@ const checkExpired = (date: string) => {
 export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = params
   const { nft } = await getData(slug)
+
+  console.log('The nft', nft)
   const endDate = new Date(nft.end).toLocaleString("en-US", {
     timeZone: "America/Los_Angeles"
   })
@@ -130,7 +134,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           </div>
         </div>
       </div>
-      <SimpleFooter />
+      <Footer />
     </>
   );
 }

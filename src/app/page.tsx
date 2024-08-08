@@ -12,7 +12,7 @@ import {
 } from "@thirdweb-dev/react";
 import styles from "../styles/Home.module.css";
 import { Header } from "@/components/Header/Header";
-import { SimpleFooter } from "@/components/footer/footer";
+import { Footer } from "@/components/footer/footer";
 import { getNfts } from "@/queries/getNfts";
 import { FilterMenu } from "@/components/filter-menu/filter-menu";
 import { Card } from "@/components/card/card";
@@ -81,7 +81,7 @@ export default function Page() {
         ))}
       </div> */}
 
-      {/* <SimpleFooter /> */}
+      <Footer />
     </div>
   );
 }

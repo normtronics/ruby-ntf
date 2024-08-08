@@ -5,7 +5,7 @@ import styles from "../../../styles/Claim.module.css";
 import { Header } from "@/components/Header/Header";
 import { Metadata, ResolvingMetadata } from "next";
 import React from "react";
-import { SimpleFooter } from "@/components/footer/footer";
+import { Footer } from "@/components/footer/footer";
 import { gql, GraphQLClient } from "graphql-request";
 import { NFT } from "@/types/nft";
 import { useAddress, useContract, useOwnedNFTs } from "@thirdweb-dev/react";
@@ -133,7 +133,7 @@ export default async function ClaimPage({ params }: { params: { slug: string } }
           </div>
         </div>
       </div>
-      <SimpleFooter />
+      <Footer />
     </>
   );
 }

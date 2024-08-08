@@ -3,7 +3,6 @@ import { Header } from "@/components/Header/Header";
 import { Metadata, ResolvingMetadata } from "next";
 import { MediaRenderer } from "../../../../components/MediaRenderer";
 import React from "react";
-import { SimpleFooter } from "@/components/footer/footer";
 import { useAddress, useContract, useNFTBalance, useOwnedNFTs } from "@thirdweb-dev/react";
 import { getNft } from "@/queries/getNft";
 import Button from "@/components/Button";
@@ -12,6 +11,7 @@ import { Description } from "@/components/description/description";
 import { Attributes } from "@/components/attribute-info/attribute-info";
 import { useAudioPlayerContext } from "@/components/audio-player/audio-player-context";
 import { BuyBox } from "@/components/buy-box/buy-box";
+import { Footer } from "@/components/footer/footer";
 
 
 type Props = {
@@ -140,7 +140,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           <Attributes attributes={nft.atributes}/>
         </div> */}
       </div> }
-      <SimpleFooter />
+      <Footer />
     </>
   );
 }
